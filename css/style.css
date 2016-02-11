@@ -1,0 +1,144 @@
+/**
+==========
+General
+==========
+**/
+body {
+    margin-top: 50px;
+    font-family: 'Open Sans', sans-serif;
+}
+#contain {
+    margin-left: 300px;
+}
+.ng-cloak {
+    display: none;
+}
+
+/**
+==========
+Log In
+==========
+**/
+#logIn {
+    background: #2dbe60 none repeat scroll 0 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+#loginFormContain {
+    bottom: 0;
+    height: 560px;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 400px;
+}
+#loginFormContain .btn-primary {
+    background: #fff none repeat scroll 0 0;
+    color: #2dbe60;
+    margin: 15px auto;
+    width: 100%;
+}
+#loginFormContain input {
+    font-size: 16px;
+    height: 60px;
+}
+#loginFormContain .logo {
+    color: #fff;
+    font-size: 200px;
+    text-align: center;
+}
+#loginFormContain p {
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+}
+
+/**
+==========
+Nav
+==========
+**/
+nav.navbar {
+    background: #2dbe60;
+}
+.navbar a {
+    color: #fff;
+}
+.navbar-brand .fa-pencil-square {
+    font-size: 45px;
+}
+.navbar-brand {
+    padding: 3px 0 0 15px;
+}
+
+/**
+==========
+Note Middle
+==========
+**/
+.note {
+    background: #eee;
+    padding: 20px;
+}
+.note:nth-child(odd) {
+    background: #F7F7F7;
+}
+
+/**
+==========
+Sidebar
+==========
+**/
+#notesSidebar h2 {
+    color: #fff;
+}
+#notesSidebar li {
+    color: #fff;
+    list-style: outside none none;
+}
+#notesSidebar ul {
+    margin: 0;
+    padding-left: 10px;
+}
+#notesSidebar {
+    background: #333 none repeat scroll 0 0;
+    height: 100%;
+    position: fixed;
+    top: 50px;
+    width: 300px;
+    padding: 20px;
+}
+
+/**
+==========
+New Note Section
+==========
+**/
+#newNoteSection {
+    margin-top: 20px;
+}
+#newNoteSection textarea {
+    resize: none;
+}
+#newNoteSection button {
+    margin-top: 20px;
+}
+
+/**
+==========
+Buttons
+==========
+**/
+.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    background-color: #2dbe60;
+    border: medium none;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 15px 40px;
+}
