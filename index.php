@@ -18,28 +18,54 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" href="css/style.css">
     </head>
-    <body ng-controller="controller" class="ng-cloak">
-        <div id="logIn" ng-if="!loggedIn">
+    <body ng-controller="controller" class="ng-cloak" ng-class="{'green': !loggedIn}">
+    <div id="overlay" ng-show="shareNoteModel"></div>
+        <div id="logIn" ng-show="!loggedIn">
             <div id="loginFormContain">
                 <div class="logo">
                     <i class="fa fa-pencil-square"></i>
                 </div>
                 <div id="register" ng-show="createAccount">
-                    <form name="registerForm" ng-submit="register(register.username,register.password1,register.password2,register.email1,register.email2,registerForm.$valid)" novalidate>
+                    <form name="registerForm" ng-submit="registerAccount(register.username,register.password1,register.password2,register.email1,register.email2,registerForm.$valid)" novalidate>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Username" name="username" ng-model="register.username" ng-required="true">
+                            <div class="available">
+                                <i class="fa fa-check-circle-o" ng-show="usernameAvailable && register.username.length > 0"></i>
+                                <i class="fa fa-times-circle" ng-show="!usernameAvailable && register.username.length > 0"></i>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" name="username"
+                                   ng-model="register.username" ng-required="true" ng-change="checkUsername(register.username)">
                         </div>
                         <div class="form-group">
+                            <div class="available">
+                                <i class="fa fa-check-circle-o" ng-show="register.email1 == register.email2"></i>
+                                <i class="fa fa-times-circle" ng-show="register.email1 !== register.email2"></i>
+                            </div>
                             <input type="email" class="form-control" placeholder="Email" name="email1" ng-model="register.email1" ng-required="true">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Confirm Email" name="email2" ng-model="register.email2" ng-required="true">
+                            <div class="available">
+                                <i class="fa fa-check-circle-o" ng-show="register.email1 == register.email2"></i>
+                                <i class="fa fa-times-circle" ng-show="register.email1 !== register.email2"></i>
+                            </div>
+                            <input type="email" class="form-control" placeholder="Confirm Email" name="email2"
+                                   ng-model="register.email2" ng-required="true" compare-to="register.email1">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Password" name="password1" ng-model="register.password1" ng-required="true">
+                            <div class="available">
+<!--                                <i class="fa fa-check-circle-o" ng-show="register.password1 == register.password2"></i>-->
+                                <i class="fa fa-times-circle" ng-show="register.password1.$error"></i>
+                            </div>
+                            <input type="password" class="form-control" placeholder="Password" name="password1"
+                                   ng-model="register.password1" ng-required="true" ng-minlength="6">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Confirm Password" name="password2" ng-model="register.password2" ng-required="true">
+                            <div class="available">
+<!--                                <i class="fa fa-check-circle-o" ng-show="register.password1 == register.password2"></i>-->
+                                <i class="fa fa-times-circle" ng-show="register.password2.$error"></i>
+                            </div>
+                            <input type="password" class="form-control" placeholder="Confirm Password"
+                                   name="password2" ng-model="register.password2" ng-required="true"
+                                   same-as="register.password1" ng-minlength="6">
                         </div>
                         <button type="submit" class="btn btn-primary" ng-class="{'disabled': registerForm.$invalid}">Register</button>
                     </form>
@@ -61,6 +87,29 @@
             </div>
         </div>
         <div ng-if="loggedIn">
+            <div class="modal" tabindex="-1" role="dialog" id="shareNote" ng-show="shareNoteModel">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Share Note</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-md-6">
+                                <form name="shareNoteForm" ng-submit="shareNote(shareUsername,shareNoteForm.$valid)">
+                                    <input class="form-control" type="text" name="shareUsername" ng-model="shareUsername"
+                                           placeholder="User to share with.">
+                                    <button type="submit" class="btn btn-primary">Share</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <nav class="navbar navbar-fixed-top">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -83,7 +132,9 @@
             <div id="notesSidebar">
                 <h3 ng-click="noteActive.active = false"><i class="fa fa-plus-circle"></i> New Note</h3>
                 <h3 ng-class="{'active': activeItem == 'myNotes'}" ng-click="getUserNotes()"><i class="fa fa-book"></i> My Notes</h3>
-                <h3 ng-class="{'active': activeItem == 'sharedNotes'}"><i class="fa fa-share-alt-square"></i> Shared Notes</h3>
+                <h3 ng-class="{'active': activeItem == 'sharedNotes'}" ng-click="getUserSharedNotes()"><i class="fa
+                fa-share-alt-square"></i>
+                    Shared Notes</h3>
                 <h3 ng-class="{'active': activeItem == 'trash'}" ng-click="getUserTrashedNotes()"><i class="fa fa-trash"></i> Trash</h3>
             </div>
             <div id="contain">
@@ -93,7 +144,7 @@
                             <div class="note" ng-repeat="note in userNotes" ng-click="activateNote(note.id,note.title,note.content)">
                                 <div class="options pull-right">
                                     <i class="fa fa-trash" ng-click="deleteNote(note.id,$event)"></i>
-                                    <i class="fa fa-share-square"></i>
+                                    <i class="fa fa-share-square" ng-click="showModal($event,note.id)"></i>
                                 </div>
                                 <h2 class="title">{{note.title}}</h2>
                                 <div class="content">{{note.content | limitTo:300}}</div>

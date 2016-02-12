@@ -7,12 +7,17 @@
  */
 
 require_once 'model.php';
+require_once 'user.php';
 
 class note extends model
 {
 
+    var $user;
+
     function __construct() {
         parent::__construct();
+
+        $this->user = new user();
     }
 
     /**
@@ -54,6 +59,22 @@ class note extends model
     }
 
     /**
+     * @param $username
+     * @param $noteID
+     * @return bool
+     *
+     * Shares a note to another user
+     */
+    public function shareNote($username,$noteID) {
+        $idToShareTo = $this->user->getIDFromUsername($username);
+
+        $this->db->query("INSERT INTO shared_notes (noteID, sharedTo, sharedFrom) VALUES (:noteID, :sharedTo, :sharedFrom)", array
+        ('noteID'=>intval($noteID), "sharedTo"=>$idToShareTo, "sharedFrom"=>$_SESSION['id']));
+
+        return true;
+    }
+
+    /**
      * @param bool $trashed
      * @return mixed
      *
@@ -68,6 +89,16 @@ class note extends model
         }
         $r = $this->db->query("SELECT * FROM notes
                     WHERE userID = :userID AND trashed = :trashed", array('userID'=>$_SESSION['id'], 'trashed' => $trashed));
+        return $r;
+    }
+
+    /**
+     * @return mixed
+     *
+     * Get's a users notes that have been shared to them
+     */
+    public function getUserSharedNotes() {
+        $r = $this->db->query("select s.noteID, n.title, n.content from shared_notes s JOIN notes n on s.noteID where s.sharedTo = :userID", array('userID'=>$_SESSION['id']));
         return $r;
     }
 }

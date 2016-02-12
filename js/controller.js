@@ -13,6 +13,11 @@ app.controller('controller', function($scope,$http,$cookies) {
         active: false
     };
 
+    $scope.shareNoteModel = false;
+    $scope.shareNoteID = false;
+
+    $scope.usernameAvailable = false;
+
     $scope.activeItem = 'myNotes';
 
     $scope.register = {};
@@ -41,7 +46,7 @@ app.controller('controller', function($scope,$http,$cookies) {
         }
     };
 
-    $scope.register = function(username,password1,password2,email1,email2,valid) {
+    $scope.registerAccount = function(username,password1,password2,email1,email2,valid) {
         if (valid) {
             $http({
                 method: "POST",
@@ -57,11 +62,8 @@ app.controller('controller', function($scope,$http,$cookies) {
             }).then(function (data) {
                 console.log(data);
                 if (data.data == 'success') {
-                    $scope.register = {};
                     $scope.createAccount = false;
-                }
-                else {
-
+                    $scope.register = {};
                 }
             });
         }
@@ -108,6 +110,20 @@ app.controller('controller', function($scope,$http,$cookies) {
         });
     };
 
+    $scope.getUserSharedNotes = function() {
+        $http({
+            method: "POST",
+            url: "/ajax/ajax.php",
+            data: {
+                type: 'getUserSharedNotes'
+            }
+        }).then(function (data) {
+            console.log(data.data);
+            $scope.userNotes = data.data;
+            $scope.activeItem = 'sharedNotes';
+        });
+    };
+
     $scope.addNewNote = function(title,content,valid) {
         if (valid) {
             $http({
@@ -126,6 +142,23 @@ app.controller('controller', function($scope,$http,$cookies) {
                 }
             });
         }
+    };
+
+    $scope.shareNote = function(username,valid) {
+        $http({
+            method: "POST",
+            url: "/ajax/ajax.php",
+            data: {
+                username: username,
+                noteID: $scope.shareNoteID,
+                type: 'shareNote'
+            }
+        }).then(function (data) {
+            console.log(data);
+            if (data.data == 'success') {
+
+            }
+        });
     };
 
     $scope.deleteNote = function(id,e) {
@@ -179,6 +212,26 @@ app.controller('controller', function($scope,$http,$cookies) {
         }
     };
 
+    $scope.checkUsername = function(username) {
+        $http({
+            method: "POST",
+            url: "/ajax/ajax.php",
+            data: {
+                username: username,
+                type: 'checkUsername'
+            }
+        }).then(function (data) {
+            console.log(data.data == 'yes');
+            $scope.usernameAvailable = data.data == 'yes';
+        });
+    };
+
+    $scope.showModal = function(e,noteID) {
+        e.stopPropagation();
+        $scope.shareNoteModel = true;
+        $scope.shareNoteID = noteID;
+    };
+
     //on load
     $http({
         method: "POST",
@@ -194,4 +247,25 @@ app.controller('controller', function($scope,$http,$cookies) {
         }
     });
 
+}).directive('sameAs', function() {
+    return {
+        require: 'ngModel',
+        link: function(scope, elem, attrs, ngModel) {
+            ngModel.$parsers.unshift(validate);
+
+            // Force-trigger the parsing pipeline.
+            scope.$watch(attrs.sameAs, function() {
+                ngModel.$setViewValue(ngModel.$viewValue);
+            });
+
+            function validate(value) {
+                var isValid = scope.$eval(attrs.sameAs) == value;
+
+                ngModel.$setValidity('same-as', isValid);
+
+                return isValid ? value : undefined;
+            }
+        }
+    };
 });
+

@@ -7,11 +7,24 @@ body {
     margin-top: 50px;
     font-family: 'Open Sans', sans-serif;
 }
+body.green {
+    background: #2dbe60;
+}
 #contain {
     margin-left: 300px;
 }
 .ng-cloak {
     display: none;
+}
+#overlay {
+    background: #000 none repeat scroll 0 0;
+    height: 100%;
+    left: 0;
+    opacity: 0.8;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1050;
 }
 
 /**
@@ -19,14 +32,14 @@ body {
 Log In
 ==========
 **/
-#logIn {
-    background: #2dbe60 none repeat scroll 0 0;
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
+/*#logIn {*/
+    /*background: #2dbe60 none repeat scroll 0 0;*/
+    /*height: 100%;*/
+    /*left: 0;*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*width: 100%;*/
+/*}*/
 #loginFormContain {
     bottom: 0;
     height: auto;
@@ -56,6 +69,12 @@ Log In
     color: #fff;
     font-weight: bold;
     text-align: center;
+}
+#register .available {
+    color: #fff;
+    font-size: 40px;
+    left: -50px;
+    position: absolute;
 }
 
 /**
@@ -186,4 +205,16 @@ Buttons
     font-size: 20px;
     font-weight: 700;
     padding: 15px 40px;
+}
+
+/**
+==========
+Modals
+==========
+**/
+#shareNote {
+    display: block;
+}
+#shareNote .modal-body button {
+    margin: 13px 0;
 }

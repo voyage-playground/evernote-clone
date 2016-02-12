@@ -76,4 +76,32 @@ class user extends model {
             return false;
         }
     }
+
+    /**
+     * @param $username
+     * @return bool
+     *
+     * Checks to see if a username is available
+     */
+    public function checkUsername($username) {
+        $r = $this->db->query(" SELECT COUNT(DISTINCT username) AS username FROM users where username = :username",array
+        ('username'=>$username));
+        $result = $r[0]['username'];
+
+        if($result == 0) return true;
+        return false;
+    }
+
+    /**
+     * @param $username
+     * @return mixed
+     *
+     * Get's a username from user id
+     */
+    public function getIDFromUsername($username) {
+        $r = $this->db->query("SELECT id from users where username = :username",array
+        ('username'=>$username));
+
+        return $r[0]['id'];
+    }
 }
