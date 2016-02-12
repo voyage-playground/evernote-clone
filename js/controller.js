@@ -14,6 +14,10 @@ app.controller('controller', function($scope,$http,$cookies) {
         active: false
     };
 
+    $scope.windowSize = window.innerWidth;
+
+    $scope.mobileActive = 'notes';
+
     $scope.loaded = true;
 
     $scope.shareNoteModel = false;

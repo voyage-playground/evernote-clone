@@ -117,34 +117,29 @@
             </div>
             <nav class="navbar navbar-fixed-top">
                 <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#"><i class="fa fa-pencil-square"></i></a>
+                    <div class="">
+                        <a class="navbar-brand pull-left" href="#"><i class="fa fa-pencil-square"></i></a>
+                        <div id="activeUser" class="pull-left">{{activeUser}}</div>
+                        <div class="pull-right"><button class="btn btn-primary" ng-click="logOut()">Logout</button></div>
                     </div>
 
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li id="activeUser">{{activeUser}}</li>
-                            <li class="pull-right"><button class="btn btn-primary" ng-click="logOut()">Logout</button></li>
-                        </ul>
-                    </div><!-- /.navbar-collapse -->
+<!--                    <div>-->
+<!--                        <ul class="nav navbar-nav">-->
+<!--                            <li class="pull-right"><button class="btn btn-primary" ng-click="logOut()">Logout</button></li>-->
+<!--                        </ul>-->
+<!--                    </div><!-- /.navbar-collapse -->
                 </div>
             </nav>
-            <div id="notesSidebar">
-                <h3 ng-click="noteActive.active = false"><i class="fa fa-plus-circle"></i> New Note</h3>
-                <h3 ng-class="{'active': activeItem == 'myNotes'}" ng-click="getUserNotes()"><i class="fa fa-book"></i> My Notes</h3>
-                <h3 ng-class="{'active': activeItem == 'sharedNotes'}" ng-click="getUserSharedNotes()"><i class="fa
+            <div id="notesSidebar" class="trans">
+                <h3 ng-class="{'active': mobileActive == 'newNote' && windowSize < 961}" ng-click="noteActive.active = false;mobileActive = 'newNote'"><i class="fa fa-plus-circle"></i> <span>New Note</span></h3>
+                <h3 ng-class="{'active': activeItem == 'myNotes'}" ng-click="getUserNotes();mobileActive='notes'"><i class="fa fa-book"></i> <span>My Notes</span></h3>
+                <h3 ng-class="{'active': activeItem == 'sharedNotes'}" ng-click="getUserSharedNotes();mobileActive='notes'"><i class="fa
                 fa-share-alt-square"></i>
-                    Shared Notes</h3>
-                <h3 ng-class="{'active': activeItem == 'trash'}" ng-click="getUserTrashedNotes()"><i class="fa fa-trash"></i> Trash</h3>
+                    <span>Shared Notes</span></h3>
+                <h3 ng-class="{'active': activeItem == 'trash'}" ng-click="getUserTrashedNotes()"><i class="fa fa-trash"></i> <span>Trash</span></h3>
             </div>
-            <div id="contain">
-                <div class="col-md-6">
+            <div id="contain" class="trans">
+                <div class="col-md-6" ng-show="windowSize > 961 || mobileActive == 'notes'">
                     <div class="row">
                         <div id="notesSection">
                             <div class="note" ng-repeat="note in userNotes" ng-click="activateNote(note.id,note.title,note.content,note.dateAdded,note.lastUpdated)">
@@ -168,7 +163,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" ng-show="windowSize > 961 || mobileActive == 'newNote'">
                     <div class="row">
                         <div id="rightSide">
                             <div class="col-xs-12">
@@ -185,7 +180,7 @@
                                         <pre>{{noteActive.content}}</pre>
                                     </div>
                                 </div>
-                                <div ng-if="!noteActive.active">
+                                <div ng-show="!noteActive.active">
                                     <h1 class="pull-left">Add a Note</h1>
                                     <div id="newNoteSection">
                                         <form ng-submit="addNewNote(newNote.title,newNote.content,newNoteForm.$valid)" name="newNoteForm" novalidate>
@@ -195,7 +190,7 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div ng-if="noteActive.active && noteActive.edit">
+                                <div ng-show="noteActive.active && noteActive.edit">
                                     <h1>Edit Note</h1>
                                     <div id="noteEditSection">
                                         <form ng-submit="updateNote(noteActive.id,noteActive.content,noteActive.title,editNoteForm.$valid)" name="editNoteForm" novalidate>
