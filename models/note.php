@@ -28,20 +28,26 @@ class note extends model
      * Add's a new note for a user
      */
     public function addNote($title,$content) {
-        $this->db->query("INSERT INTO notes (userID, content, title) VALUES (:userID, :content, :title)", array
-        ('userID'=>$_SESSION['id'], "content"=>$content, "title"=>$title));
+        $this->db->query("INSERT INTO notes (userID, content, title, lastUpdated) VALUES (:userID, :content, :title, :lastUpdated)", array
+        ('userID'=>$_SESSION['id'], "content"=>$content, "title"=>$title, "lastUpdated" => date('Y-m-d G:i:s')));
         return true;
     }
 
     /**
      * @param $id
+     * @param bool $trashed
      * @return bool
      *
-     * Delete's a note for a user
+     * Delete's or restores a note
      */
-    public function deleteNote($id) {
-        //$this->db->query("DELETE FROM notes where userID = :userID AND id = :id", array('userID'=>$_SESSION['id'], "id"=>$id));
-        $this->db->query("UPDATE notes set trashed = 1 where userID = :userID AND id = :id", array('userID'=>$_SESSION['id'], "id"=>$id));
+    public function deleteNote($id,$trashed = true) {
+        if($trashed) {
+            $trashed = 1;
+        }
+        else {
+            $trashed = 0;
+        }
+        $this->db->query("UPDATE notes set trashed = :trashed where userID = :userID AND id = :id", array('trashed' => $trashed,'userID'=>$_SESSION['id'], "id"=>$id));
         return true;
     }
 
@@ -54,8 +60,13 @@ class note extends model
      * Updates a user's note
      */
     public function updateNote($id,$content,$title) {
-        $this->db->query("UPDATE notes set title=:title,content=:content where id=:id AND userID=:userID", array('title' => $title, 'content' => $content, 'id'=>$id, 'userID'=>$_SESSION['id']));
-        return true;
+        $this->db->query("UPDATE notes set title=:title,content=:content,lastUpdated=:lastUpdated where id=:id", array('title' => $title, 'content' => $content, 'id'=>$id, 'lastUpdated' => date('Y-m-d G:i:s')));
+
+        return $this->getNoteByID($id);
+    }
+
+    public function restoreNote($id) {
+
     }
 
     /**
@@ -87,9 +98,20 @@ class note extends model
         else {
             $trashed = 0;
         }
-        $r = $this->db->query("SELECT * FROM notes
+        $r = $this->db->query("SELECT id,content,title,unix_timestamp(dateAdded) as dateAdded,unix_timestamp(lastUpdated) as lastUpdated FROM notes
                     WHERE userID = :userID AND trashed = :trashed", array('userID'=>$_SESSION['id'], 'trashed' => $trashed));
         return $r;
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     *
+     * Get's a note by a specific id
+     */
+    public function getNoteByID($id) {
+        return $this->db->query("SELECT id,content,title,unix_timestamp(dateAdded) as dateAdded,unix_timestamp(lastUpdated) as lastUpdated FROM notes
+                    WHERE id=:id", array('id'=>$id));
     }
 
     /**
@@ -98,7 +120,10 @@ class note extends model
      * Get's a users notes that have been shared to them
      */
     public function getUserSharedNotes() {
-        $r = $this->db->query("select s.noteID, n.title, n.content from shared_notes s JOIN notes n on s.noteID where s.sharedTo = :userID", array('userID'=>$_SESSION['id']));
+        $r = $this->db->query("select n.id, n.title, n.content, unix_timestamp(n.dateAdded) as dateAdded, unix_timestamp(n.lastUpdated) as lastUpdated, u.username, s.sharedFrom from notes n
+        INNER JOIN shared_notes s on s.noteID = n.id
+        INNER JOIN users u on u.id = s.sharedFrom
+        where s.sharedTo = :userID", array('userID'=>$_SESSION['id']));
         return $r;
     }
 }

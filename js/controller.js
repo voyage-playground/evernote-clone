@@ -1,10 +1,11 @@
 'use strict';
 
-var app = angular.module('noteApp', ['ngCookies']);
+var app = angular.module('noteApp', ['ngCookies','validation.match']);
 
 app.controller('controller', function($scope,$http,$cookies) {
 
-    $scope.loggedIn = $cookies.get('loggedIn') != '' ? true : false;
+    $scope.loggedIn = $cookies.get('loggedIn') ? true : false;
+    $scope.activeUser = $cookies.get('loggedIn');
     $scope.createAccount = false;
     $scope.loginError = false;
     $scope.userNotes = {};
@@ -12,6 +13,8 @@ app.controller('controller', function($scope,$http,$cookies) {
     $scope.noteActive = {
         active: false
     };
+
+    $scope.loaded = true;
 
     $scope.shareNoteModel = false;
     $scope.shareNoteID = false;
@@ -36,8 +39,12 @@ app.controller('controller', function($scope,$http,$cookies) {
                 console.log(data);
                 if (data.data == 'success') {
                     $cookies.put('loggedIn', username);
-                    $scope.loggedIn = true;
+                    $scope.activeUser = username;
                     $scope.getUserNotes();
+                    $scope.loggedIn = true;
+                    $scope.noteActive = {
+                        active: false
+                    };
                 }
                 else {
                     $scope.loginError = true;
@@ -64,6 +71,7 @@ app.controller('controller', function($scope,$http,$cookies) {
                 if (data.data == 'success') {
                     $scope.createAccount = false;
                     $scope.register = {};
+                    $scope.registerForm.$setPristine();
                 }
             });
         }
@@ -78,7 +86,7 @@ app.controller('controller', function($scope,$http,$cookies) {
             }
         }).then(function (data) {
             $scope.loggedIn = false;
-            $cookies.put('loggedIn', '');
+            $cookies.remove("loggedIn");
         });
     };
 
@@ -145,20 +153,20 @@ app.controller('controller', function($scope,$http,$cookies) {
     };
 
     $scope.shareNote = function(username,valid) {
-        $http({
-            method: "POST",
-            url: "/ajax/ajax.php",
-            data: {
-                username: username,
-                noteID: $scope.shareNoteID,
-                type: 'shareNote'
-            }
-        }).then(function (data) {
-            console.log(data);
-            if (data.data == 'success') {
-
-            }
-        });
+        if(valid && !$scope.usernameAvailable) {
+            $http({
+                method: "POST",
+                url: "/ajax/ajax.php",
+                data: {
+                    username: username,
+                    noteID: $scope.shareNoteID,
+                    type: 'shareNote'
+                }
+            }).then(function (data) {
+                console.log(data);
+                $scope.closeModal();
+            });
+        }
     };
 
     $scope.deleteNote = function(id,e) {
@@ -189,26 +197,48 @@ app.controller('controller', function($scope,$http,$cookies) {
                     type: 'updateNote'
                 }
             }).then(function (data) {
-                if (data.data == 'success') {
-                    $scope.getUserNotes();
-                    $scope.noteActive = {
-                        id: id,
-                        active: true,
-                        title: title,
-                        content: content,
-                        edit: false
-                    }
-                }
+                data = data.data[0];
+                //console.log(data);
+               //console.log(data.data.lastUpdated);
+                $scope.noteActive = {
+                    id: data.id,
+                    active: true,
+                    title: data.title,
+                    content: data.content,
+                    lastUpdated: data.lastUpdated,
+                    dateAdded: data.dateAdded,
+                    edit: false
+                };
+                $scope.getUserNotes();
+                console.log($scope.noteActive);
             });
         }
     };
 
-    $scope.activateNote = function(id,title,content) {
+    $scope.restoreNote = function(id,e) {
+        e.stopPropagation();
+        $http({
+            method: "POST",
+            url: "/ajax/ajax.php",
+            data: {
+                id: id,
+                type: 'restoreNote'
+            }
+        }).then(function (data) {
+
+            $scope.getUserNotes();
+            console.log($scope.noteActive);
+        });
+    };
+
+    $scope.activateNote = function(id,title,content,dateAdded,lastUpdated) {
         $scope.noteActive = {
             id: id,
             active: true,
             title: title,
-            content: content
+            content: content,
+            dateAdded: dateAdded,
+            lastUpdated: lastUpdated
         }
     };
 
@@ -232,6 +262,10 @@ app.controller('controller', function($scope,$http,$cookies) {
         $scope.shareNoteID = noteID;
     };
 
+    $scope.closeModal = function() {
+        $scope.shareNoteModel = false;
+    };
+
     //on load
     $http({
         method: "POST",
@@ -247,25 +281,31 @@ app.controller('controller', function($scope,$http,$cookies) {
         }
     });
 
-}).directive('sameAs', function() {
-    return {
-        require: 'ngModel',
-        link: function(scope, elem, attrs, ngModel) {
-            ngModel.$parsers.unshift(validate);
-
-            // Force-trigger the parsing pipeline.
-            scope.$watch(attrs.sameAs, function() {
-                ngModel.$setViewValue(ngModel.$viewValue);
-            });
-
-            function validate(value) {
-                var isValid = scope.$eval(attrs.sameAs) == value;
-
-                ngModel.$setValidity('same-as', isValid);
-
-                return isValid ? value : undefined;
-            }
-        }
+}).filter('dateToISO', function() {
+    return function(input) {
+        return new Date(input).toISOString();
     };
 });
+
+//    .directive('sameAs', function() {
+//    return {
+//        require: 'ngModel',
+//        link: function(scope, elem, attrs, ngModel) {
+//            ngModel.$parsers.unshift(validate);
+//
+//            // Force-trigger the parsing pipeline.
+//            scope.$watch(attrs.sameAs, function() {
+//                ngModel.$setViewValue(ngModel.$viewValue);
+//            });
+//
+//            function validate(value) {
+//                var isValid = scope.$eval(attrs.sameAs) == value;
+//
+//                ngModel.$setValidity('same-as', isValid);
+//
+//                return isValid ? value : undefined;
+//            }
+//        }
+//    };
+//});
 

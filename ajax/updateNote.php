@@ -10,9 +10,5 @@ require_once '../models/note.php';
 
 $note = new note();
 
-if($note->updateNote($data->id,$data->content,$data->title)) {
-    echo 'success';
-}
-else {
-    echo 'error';
-}
+header('Content-Type: application/json');
+echo json_encode($note->updateNote($data->id,$data->content,$data->title));
