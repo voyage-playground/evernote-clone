@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: epsokc
+ * User: Jaden Lemmon
  * Date: 2/11/16
  * Time: 1:09 PM
  */
@@ -22,7 +22,7 @@ class user extends model {
      * Log's a user in
      */
     public function logIn($username,$password) {
-        //$password = md5($password);
+        $password = md5($password);
         $r = $this->db->query("SELECT id, username, password FROM users
                     WHERE username = :username AND password = :password", array
         ('username'=>$username, "password"=>$password));
@@ -35,8 +35,31 @@ class user extends model {
         return false;
     }
 
+    /**
+     * @param $username
+     * @param $password1
+     * @param $password2
+     * @param $email1
+     * @param $email2
+     * @return bool
+     *
+     * Creates a new user account
+     */
+    public function createAccount($username,$password1,$password2,$email1,$email2) {
+        if($password1 !== $password2 || $email1 !== $email2) return false;
+
+        $password1 = md5($password1);
+
+        $this->db->query("INSERT INTO users (username, password, email) VALUES (:username, :password, :email)", array
+        ('username'=>$username, "password"=>$password1, "email"=>$email1));
+
+        return true;
+    }
+
+    /**
+     * Log's out a user
+     */
     public function logOut() {
-        session_start();
         session_destroy();
     }
 

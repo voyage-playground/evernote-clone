@@ -8,8 +8,6 @@
 
 require_once '../models/user.php';
 
-session_start();
-
 $user = new user();
 
 if($user->isLoggedIn()){

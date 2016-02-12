@@ -24,17 +24,40 @@
                 <div class="logo">
                     <i class="fa fa-pencil-square"></i>
                 </div>
-                <div class="alert alert-danger" ng-if="loginError">Your username or password is incorrect</div>
-                <form name="loginForm" ng-submit="logIn(username,password,loginForm.$valid)" novalidate>
-                    <div class="form-group">
-                        <input type="text" name="username" placeholder="Username" class="form-control" ng-model="username" ng-required="true">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" name="password" placeholder="Password" class="form-control" ng-model="password" ng-required="true">
-                    </div>
-                    <button class="btn btn-primary" type="submit" ng-class="{'disabled': loginForm.$invalid}">Log In</button>
-                </form>
-                <p>Sign Up</p>
+                <div id="register" ng-show="createAccount">
+                    <form name="registerForm" ng-submit="register(register.username,register.password1,register.password2,register.email1,register.email2,registerForm.$valid)" novalidate>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Username" name="username" ng-model="register.username" ng-required="true">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Email" name="email1" ng-model="register.email1" ng-required="true">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Confirm Email" name="email2" ng-model="register.email2" ng-required="true">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Password" name="password1" ng-model="register.password1" ng-required="true">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Confirm Password" name="password2" ng-model="register.password2" ng-required="true">
+                        </div>
+                        <button type="submit" class="btn btn-primary" ng-class="{'disabled': registerForm.$invalid}">Register</button>
+                    </form>
+                    <p ng-click="createAccount = false">Log In</p>
+                </div>
+                <div ng-show="!createAccount">
+                    <div class="alert alert-danger" ng-if="loginError">Your username or password is incorrect</div>
+                    <form name="loginForm" ng-submit="logIn(username,password,loginForm.$valid)" novalidate>
+                        <div class="form-group">
+                            <input type="text" name="username" placeholder="Username" class="form-control" ng-model="username" ng-required="true">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password" placeholder="Password" class="form-control" ng-model="password" ng-required="true">
+                        </div>
+                        <button class="btn btn-primary" type="submit" ng-class="{'disabled': loginForm.$invalid}">Log In</button>
+                    </form>
+                    <p ng-click="createAccount = true">Sign Up</p>
+                </div>
             </div>
         </div>
         <div ng-if="loggedIn">
@@ -52,54 +75,72 @@
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                            <li><a href="#" ng-click="logOut()">Logout</a></li>
+                            <li class="pull-right"><button class="btn btn-primary" ng-click="logOut()">Logout</button></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div>
             </nav>
             <div id="notesSidebar">
-                <h2><i class="fa fa-plus-circle"></i> New Note</h2>
-                <h2>My Notes</h2>
-                    <ul>
-                        <li>Note 1</li>
-                        <li>Note 2</li>
-                        <li>Note 3</li>
-                    </ul>
-                <h2>Shared Notes</h2>
-                <ul>
-                    <li>Note 1</li>
-                    <li>Note 2</li>
-                    <li>Note 3</li>
-                </ul>
+                <h3 ng-click="noteActive.active = false"><i class="fa fa-plus-circle"></i> New Note</h3>
+                <h3 ng-class="{'active': activeItem == 'myNotes'}" ng-click="getUserNotes()"><i class="fa fa-book"></i> My Notes</h3>
+                <h3 ng-class="{'active': activeItem == 'sharedNotes'}"><i class="fa fa-share-alt-square"></i> Shared Notes</h3>
+                <h3 ng-class="{'active': activeItem == 'trash'}" ng-click="getUserTrashedNotes()"><i class="fa fa-trash"></i> Trash</h3>
             </div>
             <div id="contain">
                 <div class="col-md-6">
                     <div class="row">
-                        <div class="note">
-                            <h2 class="title">Sample Note</h2>
-                            <div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lacus quam, interdum bibendum feugiat eget, ornare vitae tellus. Proin congue sapien pharetra facilisis dictum. Etiam vitae purus pretium, facilisis purus in, vestibulum tellus. Integer tempor congue velit ac pretium. Vivamus vitae quam in leo mollis tempus. Proin condimentum semper luctus. Fusce tincidunt blandit arcu, eget scelerisque tortor commodo et.</div>
-                        </div>
-                        <div class="note">
-                            <h2 class="title">Sample Note2</h2>
-                            <div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lacus quam, interdum bibendum feugiat eget, ornare vitae tellus. Proin congue sapien pharetra facilisis dictum. Etiam vitae purus pretium, facilisis purus in, vestibulum tellus. Integer tempor congue velit ac pretium. Vivamus vitae quam in leo mollis tempus. Proin condimentum semper luctus. Fusce tincidunt blandit arcu, eget scelerisque tortor commodo et.</div>
+                        <div id="notesSection">
+                            <div class="note" ng-repeat="note in userNotes" ng-click="activateNote(note.id,note.title,note.content)">
+                                <div class="options pull-right">
+                                    <i class="fa fa-trash" ng-click="deleteNote(note.id,$event)"></i>
+                                    <i class="fa fa-share-square"></i>
+                                </div>
+                                <h2 class="title">{{note.title}}</h2>
+                                <div class="content">{{note.content | limitTo:300}}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <h1>Add a Note</h1>
-                    <div id="newNoteSection">
-                        <form>
-                            <input type="text" placeholder="Title" name="title" class="form-control">
-                            <textarea rows="20" name="content" class="form-control"></textarea>
-                            <button class="btn btn-primary">Add</button>
-                        </form>
+                    <div class="row">
+                        <div id="rightSide">
+                            <div class="col-xs-12">
+                                <div ng-if="noteActive.active && !noteActive.edit">
+                                    <div class="options pull-right">
+                                        <i class="fa fa-pencil-square-o" ng-click="noteActive.edit = true"></i>
+                                    </div>
+                                    <h1>{{noteActive.title}}</h1>
+                                    <p>{{noteActive.content}}</p>
+                                </div>
+                                <div ng-if="!noteActive.active">
+                                    <h1 class="pull-left">Add a Note</h1>
+                                    <div id="newNoteSection">
+                                        <form ng-submit="addNewNote(newNote.title,newNote.content,newNoteForm.$valid)" name="newNoteForm" novalidate>
+                                            <input type="text" placeholder="Title" name="title" class="form-control" ng-model="newNote.title">
+                                            <textarea rows="20" name="content" class="form-control" ng-model="newNote.content"></textarea>
+                                            <button class="btn btn-primary" type="submit" ng-class="{'disabled': newNoteForm.$invalid}">Add</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div ng-if="noteActive.active && noteActive.edit">
+                                    <h1>Edit Note</h1>
+                                    <div id="noteEditSection">
+                                        <form ng-submit="updateNote(noteActive.id,noteActive.content,noteActive.title,editNoteForm.$valid)" name="editNoteForm" novalidate>
+                                            <input type="text" placeholder="Title" name="title" class="form-control" ng-model="noteActive.title">
+                                            <textarea rows="20" name="content" class="form-control" ng-model="noteActive.content"></textarea>
+                                            <button class="btn btn-primary" type="submit" ng-class="{'disabled': editNoteForm.$invalid}">Update</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-cookies.js"></script>
         <script src="js/controller.js"></script>
     </body>
 </html>

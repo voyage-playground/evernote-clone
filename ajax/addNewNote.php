@@ -3,14 +3,14 @@
  * Created by PhpStorm.
  * User: Jaden Lemmon
  * Date: 2/11/16
- * Time: 1:02 PM
+ * Time: 2:19 PM
  */
 
-require_once '../models/user.php';
+require_once '../models/note.php';
 
-$user = new user();
+$note = new note();
 
-if($user->logIn($data->username,$data->password)) {
+if($note->addNote($data->title,$data->content)) {
     echo 'success';
 }
 else {

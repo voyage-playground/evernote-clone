@@ -2,6 +2,7 @@
 /**
  * Ajax Controller
  */
+session_start();
 
 $postdata = file_get_contents("php://input");
 
