@@ -2,7 +2,14 @@
 
 var app = angular.module('noteApp', ['ngCookies','validation.match']);
 
-app.controller('controller', function($scope,$http,$cookies) {
+app.controller('controller', function($scope,$http,$cookies,$window) {
+
+    //Handle resize for layout changes
+    var w = angular.element($window);
+    w.bind('resize', function () {
+        $scope.windowSize = window.innerWidth;
+        $scope.$apply();
+    });
 
     $scope.loggedIn = $cookies.get('loggedIn') ? true : false;
     $scope.activeUser = $cookies.get('loggedIn');

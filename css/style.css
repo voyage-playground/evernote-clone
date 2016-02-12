@@ -6,6 +6,7 @@ General
 body {
     margin-top: 50px;
     font-family: 'Open Sans', sans-serif;
+    overflow: hidden;
 }
 body.green {
     background: #2dbe60;
@@ -120,7 +121,7 @@ nav.navbar {
     color: #fff;
     font-size: 20px;
     font-weight: 700;
-    margin: 8px 16px;
+    margin: 10px 16px;
 }
 
 /**
@@ -145,7 +146,7 @@ Note Middle
     cursor: pointer;
 }
 #notesSection {
-    height: 100vh;
+    height: 93.6vh;
     overflow-y: scroll;
 }
 #notesSection button.btn.btn-default {
@@ -191,7 +192,7 @@ New Note Section
 **/
 #rightSide {
     background: #eee none repeat scroll 0 0;
-    height: 100vh;
+    height: 94vh;
     margin-top: 0;
     padding-top: 15px;
 }
@@ -265,6 +266,12 @@ Media Queries
     }
     #contain {
         margin-left: 60px;
+    }
+}
+
+@media(max-width: 767px) {
+    .navbar-brand {
+        padding: 3px 0;
     }
 }
 
