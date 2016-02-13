@@ -154,7 +154,7 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
      */
     $scope.getUserSharedNotes = function() {
         $http.post("/ajax/getUserSharedNotes").then(function (data) {
-            $scope.unReadNotes = data.data.unRead !== 'yes';
+            $scope.unReadNotes = data.data.unRead == 'yes';
             $scope.userNotes = data.data.notes;
             $scope.activeItem = 'sharedNotes';
             $scope.mobileActive = 'notes';
