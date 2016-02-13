@@ -6,7 +6,7 @@
  * Time: 2:19 PM
  */
 
-require_once '../models/note.php';
+require_once dirname(dirname(__FILE__)).'/models/note.php';
 
 $note = new note();
 

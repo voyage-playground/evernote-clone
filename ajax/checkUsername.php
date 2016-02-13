@@ -6,7 +6,7 @@
  * Time: 9:21 PM
  */
 
-require_once '../models/user.php';
+require_once dirname(dirname(__FILE__)).'/models/user.php';
 
 $user = new user();
 

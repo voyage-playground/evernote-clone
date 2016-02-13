@@ -8,8 +8,15 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
     var w = angular.element($window);
     w.bind('resize', function () {
         $scope.windowSize = window.innerWidth;
+        $scope.isMobile = window.innerWidth < 961;
         $scope.$apply();
+
+        console.log($scope.isMobile);
     });
+
+    $scope.isMobile = window.innerWidth < 961;
+
+    console.log($scope.isMobile);
 
     $scope.loggedIn = $cookies.get('loggedIn') ? true : false;
     $scope.activeUser = $cookies.get('loggedIn');
@@ -40,7 +47,7 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
         if (valid) {
             $http({
                 method: "POST",
-                url: "/ajax/ajax.php",
+                url: "/ajax/login",
                 data: {
                     username: username,
                     password: password,
@@ -68,7 +75,7 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
         if (valid) {
             $http({
                 method: "POST",
-                url: "/ajax/ajax.php",
+                url: "/ajax/createAccount",
                 data: {
                     username: username,
                     password1: password1,
@@ -91,7 +98,7 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
     $scope.logOut = function() {
         $http({
             method: "POST",
-            url: "/ajax/ajax.php",
+            url: "/ajax/logout",
             data: {
                 type: 'logout'
             }
@@ -104,7 +111,7 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
     $scope.getUserNotes = function() {
         $http({
             method: "POST",
-            url: "/ajax/ajax.php",
+            url: "/ajax/getUserNotes",
             data: {
                 type: 'getUserNotes'
             }
@@ -112,13 +119,14 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
             console.log(data.data);
             $scope.userNotes = data.data;
             $scope.activeItem = 'myNotes';
+            $scope.mobileActive = 'notes';
         });
     };
 
     $scope.getUserTrashedNotes = function() {
         $http({
             method: "POST",
-            url: "/ajax/ajax.php",
+            url: "/ajax/getUserTrashedNotes",
             data: {
                 type: 'getUserTrashedNotes'
             }
@@ -126,13 +134,14 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
             console.log(data.data);
             $scope.userNotes = data.data;
             $scope.activeItem = 'trash';
+            $scope.mobileActive = 'notes';
         });
     };
 
     $scope.getUserSharedNotes = function() {
         $http({
             method: "POST",
-            url: "/ajax/ajax.php",
+            url: "/ajax/getUserSharedNotes",
             data: {
                 type: 'getUserSharedNotes'
             }
@@ -140,6 +149,7 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
             console.log(data.data);
             $scope.userNotes = data.data;
             $scope.activeItem = 'sharedNotes';
+            $scope.mobileActive = 'notes';
         });
     };
 
@@ -147,7 +157,7 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
         if (valid) {
             $http({
                 method: "POST",
-                url: "/ajax/ajax.php",
+                url: "/ajax/addNewNote",
                 data: {
                     title: title,
                     content: content,
@@ -167,7 +177,7 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
         if(valid && !$scope.usernameAvailable) {
             $http({
                 method: "POST",
-                url: "/ajax/ajax.php",
+                url: "/ajax/shareNote",
                 data: {
                     username: username,
                     noteID: $scope.shareNoteID,
@@ -184,7 +194,7 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
         e.stopPropagation();
         $http({
             method: "POST",
-            url: "/ajax/ajax.php",
+            url: "/ajax/deleteNote",
             data: {
                 id: id,
                 type: 'deleteNote'
@@ -200,7 +210,7 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
         if (valid) {
             $http({
                 method: "POST",
-                url: "/ajax/ajax.php",
+                url: "/ajax/updateNote",
                 data: {
                     id: id,
                     content: content,
@@ -230,7 +240,7 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
         e.stopPropagation();
         $http({
             method: "POST",
-            url: "/ajax/ajax.php",
+            url: "/ajax/restoreNote",
             data: {
                 id: id,
                 type: 'restoreNote'
@@ -250,13 +260,15 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
             content: content,
             dateAdded: dateAdded,
             lastUpdated: lastUpdated
-        }
+        };
+        $scope.mobileActive = 'newNote';
+        console.log($scope.mobileActive);
     };
 
     $scope.checkUsername = function(username) {
         $http({
             method: "POST",
-            url: "/ajax/ajax.php",
+            url: "/ajax/checkUsername",
             data: {
                 username: username,
                 type: 'checkUsername'
@@ -277,10 +289,15 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
         $scope.shareNoteModel = false;
     };
 
+    $scope.showNewNote = function() {
+        $scope.noteActive.active = false;
+        $scope.mobileActive = 'newNote';
+    };
+
     //on load
     $http({
         method: "POST",
-        url: "/ajax/ajax.php",
+        url: "/ajax/checkUserStatus",
         data: {
             type: 'checkUserStatus'
         }

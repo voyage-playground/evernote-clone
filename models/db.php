@@ -52,7 +52,7 @@ class DB
      */
     private function Connect()
     {
-        require_once '../../global.php';
+        require_once dirname(dirname(dirname(__FILE__))).'/global.php';
         //$this->settings = parse_ini_file("../settings.ini.php");
         $this->settings = array(
             'host' => 'localhost',

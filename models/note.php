@@ -99,7 +99,7 @@ class note extends model
             $trashed = 0;
         }
         $r = $this->db->query("SELECT id,content,title,unix_timestamp(dateAdded) as dateAdded,unix_timestamp(lastUpdated) as lastUpdated FROM notes
-                    WHERE userID = :userID AND trashed = :trashed", array('userID'=>$_SESSION['id'], 'trashed' => $trashed));
+                    WHERE userID = :userID AND trashed = :trashed order by lastUpdated desc", array('userID'=>$_SESSION['id'], 'trashed' => $trashed));
         return $r;
     }
 
@@ -123,7 +123,7 @@ class note extends model
         $r = $this->db->query("select n.id, n.title, n.content, unix_timestamp(n.dateAdded) as dateAdded, unix_timestamp(n.lastUpdated) as lastUpdated, u.username, s.sharedFrom from notes n
         INNER JOIN shared_notes s on s.noteID = n.id
         INNER JOIN users u on u.id = s.sharedFrom
-        where s.sharedTo = :userID", array('userID'=>$_SESSION['id']));
+        where s.sharedTo = :userID order by n.lastUpdated desc", array('userID'=>$_SESSION['id']));
         return $r;
     }
 }
