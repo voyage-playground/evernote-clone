@@ -32,6 +32,11 @@ pre {
     border: medium none;
     border-radius: 0;
     font-family: open sans;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
 }
 
 .trans {
@@ -44,14 +49,6 @@ pre {
 Log In
 ==========
 **/
-/*#logIn {*/
-    /*background: #2dbe60 none repeat scroll 0 0;*/
-    /*height: 100%;*/
-    /*left: 0;*/
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*width: 100%;*/
-/*}*/
 #loginFormContain {
     bottom: 0;
     height: auto;
@@ -195,6 +192,7 @@ New Note Section
     height: 94vh;
     margin-top: 0;
     padding-top: 15px;
+    overflow-y; scroll;
 }
 #newNoteSection {
     margin-top: 20px;
