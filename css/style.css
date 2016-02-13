@@ -232,10 +232,10 @@ New Note Section
     margin-top: 20px;
 }
 #newNoteSection textarea, #noteEditSection textarea {
-    resize: none;
     border: medium none;
     border-radius: 0;
     box-shadow: none;
+    height: 200px;
 }
 #newNoteSection button, #noteEditSection button {
     margin-top: 20px;
