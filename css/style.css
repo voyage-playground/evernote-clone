@@ -223,7 +223,7 @@ New Note Section
     height: 94vh;
     margin-top: 0;
     padding-top: 15px;
-    overflow-y; scroll;
+    overflow-y: scroll;
 }
 #rightSide .options .fa {
     font-size: 30px;
