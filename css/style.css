@@ -8,11 +8,32 @@ body {
     font-family: 'Open Sans', sans-serif;
     overflow: hidden;
 }
+.ng-enter {
+    transition: all ease 0.5s;
+    opacity:0;
+}
+.ng-enter.ng-enter-active {
+    opacity: 1;
+}
+/*.ng-leave {*/
+    /*transition: all ease 0.5s;*/
+    /*opacity:1;*/
+/*}*/
+/*.ng-leave.ng-leave-active {*/
+    /*opacity:0;*/
+/*}*/
+/** {*/
+    /*transition: all ease 0.5s;*/
+    /*opacity: 1;*/
+/*}*/
+/**.ng-hide {*/
+    /*opacity: 0;*/
+/*}*/
 body.green {
     background: #2dbe60;
 }
 #contain {
-    margin-left: 300px;
+    margin-left: 220px;
 }
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
@@ -26,6 +47,10 @@ body.green {
     top: 0;
     width: 100%;
     z-index: 1050;
+    transition: all ease 0.5s;
+}
+#overlay.ng-hide {
+    opacity: 0;
 }
 pre {
     background: #fff none repeat scroll 0 0;
@@ -179,7 +204,7 @@ Sidebar
     height: 100%;
     position: fixed;
     top: 50px;
-    width: 300px;
+    width: 220px;
 }
 
 /**
@@ -193,6 +218,9 @@ New Note Section
     margin-top: 0;
     padding-top: 15px;
     overflow-y; scroll;
+}
+#rightSide .options .fa {
+    font-size: 30px;
 }
 #newNoteSection {
     margin-top: 20px;
@@ -221,6 +249,9 @@ New Note Section
 Buttons
 ==========
 **/
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+    outline: none;
+}
 .btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
     background-color: #2dbe60;
     border: medium none;
@@ -252,6 +283,16 @@ Modals
     left: -25px;
     position: absolute;
     top: -6px;
+}
+#shareNote .modal-dialog {
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+    transition: all ease 0.5s;
+    -webkit-transition: all ease 0.5s;
+}
+#shareNote.ng-hide .modal-dialog {
+    transform: translateY(-1000px);
+    -webkit-transform: translateY(-1000px);
 }
 
 /**

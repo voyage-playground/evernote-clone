@@ -17,8 +17,13 @@
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" href="css/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-cookies.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-animate.js"></script>
+        <script src="js/angular-validation-match.min.js"></script>
+        <script src="js/controller.js"></script>
     </head>
-    <body ng-controller="controller" class="ng-cloak" ng-class="{'green': !loggedIn}" ng-show="loaded" ng-cloak>
+    <body ng-controller="controller" class="ng-cloak" ng-class="{'green': !loggedIn}">
     <div id="overlay" ng-show="shareNoteModel"></div>
         <div id="logIn" ng-show="!loggedIn">
             <div id="loginFormContain">
@@ -38,14 +43,14 @@
                         <div class="form-group">
                             <div class="available">
                                 <i class="fa fa-check-circle-o" data-ng-show="!registerForm.email2.$error.match && !registerForm.email2.$pristine"></i>
-                                <i class="fa fa-times-circle" ng-show="register.email2.$error" data-ng-show="registerForm.email2.$error.match"></i>
+                                <i class="fa fa-times-circle" data-ng-show="registerForm.email2.$error.match"></i>
                             </div>
                             <input type="email" class="form-control" placeholder="Email" name="email1" ng-model="register.email1" ng-required="true">
                         </div>
                         <div class="form-group">
                             <div class="available">
                                 <i class="fa fa-check-circle-o" data-ng-show="!registerForm.email2.$error.match && !registerForm.email2.$pristine"></i>
-                                <i class="fa fa-times-circle" ng-show="register.email2.$error" data-ng-show="registerForm.email2.$error.match"></i>
+                                <i class="fa fa-times-circle" data-ng-show="registerForm.email2.$error.match"></i>
                             </div>
                             <input type="email" class="form-control" placeholder="Confirm Email" name="email2"
                                    ng-model="register.email2" ng-required="true" data-match="register.email1">
@@ -53,7 +58,7 @@
                         <div class="form-group">
                             <div class="available">
                                 <i class="fa fa-check-circle-o" data-ng-show="!registerForm.password2.$error.match && !registerForm.password2.$pristine"></i>
-                                <i class="fa fa-times-circle" ng-show="register.password2.$error" data-ng-show="registerForm.password2.$error.match"></i>
+                                <i class="fa fa-times-circle" data-ng-show="registerForm.password2.$error.match"></i>
                             </div>
                             <input type="password" class="form-control" placeholder="Password" name="password1"
                                    ng-model="register.password1" ng-required="true" ng-minlength="6">
@@ -61,7 +66,7 @@
                         <div class="form-group">
                             <div class="available">
                                 <i class="fa fa-check-circle-o" data-ng-show="!registerForm.password2.$error.match && !registerForm.password2.$pristine"></i>
-                                <i class="fa fa-times-circle" ng-show="register.password2.$error" data-ng-show="registerForm.password2.$error.match"></i>
+                                <i class="fa fa-times-circle" data-ng-show="registerForm.password2.$error.match"></i>
                             </div>
                             <input type="password" class="form-control" placeholder="Confirm Password"
                                    name="password2" ng-model="register.password2" ng-required="true"
@@ -86,7 +91,7 @@
                 </div>
             </div>
         </div>
-        <div ng-if="loggedIn">
+        <div ng-show="loggedIn">
             <div class="modal" tabindex="-1" role="dialog" id="shareNote" ng-show="shareNoteModel">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -202,10 +207,5 @@
                 </div>
             </div>
         </div>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-cookies.js"></script>
-        <script src="js/angular-validation-match.min.js"></script>
-        <script src="js/controller.js"></script>
     </body>
 </html>

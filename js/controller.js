@@ -1,11 +1,8 @@
 'use strict';
 
-var app = angular.module('noteApp', ['ngCookies','validation.match']);
+var app = angular.module('noteApp', ['ngCookies','validation.match','ngAnimate']);
 
 app.controller('controller', function($scope,$http,$cookies,$window) {
-
-    //Angular loaded
-    $scope.loaded = true;
 
     //Handle resize for layout changes
     var w = angular.element($window);
@@ -352,5 +349,6 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
         }
     });
 
+    $scope.loaded = true;
 });
 
