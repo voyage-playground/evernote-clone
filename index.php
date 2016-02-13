@@ -3,9 +3,7 @@ session_start();
 
 require_once 'controllers/router.php';
 
-$router = new router();
-
-$url = $router->parseURL();
+$url = router::parseURL();
 
 if($url[3] == 'ajax') {
     $postdata = file_get_contents("php://input");

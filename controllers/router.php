@@ -11,7 +11,7 @@ class router {
     function __construct() {
     }
 
-    function parseURL() {
+    static function parseURL() {
         $requestUrl = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         $requestString = substr($requestUrl, strlen(0));
 
