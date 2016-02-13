@@ -6,7 +6,6 @@ General
 body {
     margin-top: 50px;
     font-family: 'Open Sans', sans-serif;
-    overflow: hidden;
 }
 .ng-enter {
     transition: all ease 0.5s;
@@ -62,6 +61,7 @@ pre {
     white-space: -pre-wrap;
     white-space: -o-pre-wrap;
     word-wrap: break-word;
+    margin-bottom: 100px;
 }
 
 .trans {
@@ -239,6 +239,7 @@ New Note Section
 }
 #newNoteSection button, #noteEditSection button {
     margin-top: 20px;
+    margin-bottom: 30px;
 }
 #newNoteSection input[name="title"], #noteEditSection input[name="title"] {
     border-bottom: 2px solid #E5E5E5;
