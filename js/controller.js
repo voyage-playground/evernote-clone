@@ -10,13 +10,9 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
         $scope.windowSize = window.innerWidth;
         $scope.isMobile = window.innerWidth < 961;
         $scope.$apply();
-
-        console.log($scope.isMobile);
     });
 
     $scope.isMobile = window.innerWidth < 961;
-
-    console.log($scope.isMobile);
 
     $scope.loggedIn = $cookies.get('loggedIn') ? true : false;
     $scope.activeUser = $cookies.get('loggedIn');
@@ -54,7 +50,6 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
                     type: 'login'
                 }
             }).then(function (data) {
-                console.log(data);
                 if (data.data == 'success') {
                     $cookies.put('loggedIn', username);
                     $scope.activeUser = username;
@@ -85,7 +80,6 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
                     type: 'createAccount'
                 }
             }).then(function (data) {
-                console.log(data);
                 if (data.data == 'success') {
                     $scope.createAccount = false;
                     $scope.register = {};
@@ -116,7 +110,6 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
                 type: 'getUserNotes'
             }
         }).then(function (data) {
-            console.log(data.data);
             $scope.userNotes = data.data;
             $scope.activeItem = 'myNotes';
             $scope.mobileActive = 'notes';
@@ -131,7 +124,6 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
                 type: 'getUserTrashedNotes'
             }
         }).then(function (data) {
-            console.log(data.data);
             $scope.userNotes = data.data;
             $scope.activeItem = 'trash';
             $scope.mobileActive = 'notes';
@@ -146,7 +138,6 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
                 type: 'getUserSharedNotes'
             }
         }).then(function (data) {
-            console.log(data.data);
             $scope.userNotes = data.data;
             $scope.activeItem = 'sharedNotes';
             $scope.mobileActive = 'notes';
@@ -164,7 +155,6 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
                     type: 'addNewNote'
                 }
             }).then(function (data) {
-                console.log(data);
                 if (data.data == 'success') {
                     $scope.getUserNotes();
                     $scope.newNote = {};
@@ -184,7 +174,6 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
                     type: 'shareNote'
                 }
             }).then(function (data) {
-                console.log(data);
                 $scope.closeModal();
             });
         }
@@ -219,8 +208,6 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
                 }
             }).then(function (data) {
                 data = data.data[0];
-                //console.log(data);
-               //console.log(data.data.lastUpdated);
                 $scope.noteActive = {
                     id: data.id,
                     active: true,
@@ -302,38 +289,11 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
             type: 'checkUserStatus'
         }
     }).then(function (data) {
-        console.log(data);
         if (data.data == 'yes') {
             $scope.loggedIn = true;
             $scope.getUserNotes();
         }
     });
 
-}).filter('dateToISO', function() {
-    return function(input) {
-        return new Date(input).toISOString();
-    };
 });
-
-//    .directive('sameAs', function() {
-//    return {
-//        require: 'ngModel',
-//        link: function(scope, elem, attrs, ngModel) {
-//            ngModel.$parsers.unshift(validate);
-//
-//            // Force-trigger the parsing pipeline.
-//            scope.$watch(attrs.sameAs, function() {
-//                ngModel.$setViewValue(ngModel.$viewValue);
-//            });
-//
-//            function validate(value) {
-//                var isValid = scope.$eval(attrs.sameAs) == value;
-//
-//                ngModel.$setValidity('same-as', isValid);
-//
-//                return isValid ? value : undefined;
-//            }
-//        }
-//    };
-//});
 
