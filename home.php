@@ -168,15 +168,17 @@
                         <div id="rightSide">
                             <div class="col-xs-12">
                                 <div ng-if="noteActive.active && !noteActive.edit">
-                                    <div class="pull-left">
-                                        <p>Dated Added: {{noteActive.dateAdded * 1000 | date:"MM/dd/yyyy 'at' h:mma"}}</p>
-                                        <p>Last Updated: {{noteActive.lastUpdated * 1000 | date:"MM/dd/yyyy 'at' h:mma"}}</p>
-                                    </div>
-                                    <div class="options pull-right">
-                                        <i class="fa fa-pencil-square-o" ng-click="noteActive.edit = true;
-                                        mobileActive = 'newNote'"></i>
-                                    </div>
                                     <div class="row col-xs-12">
+                                        <div class="pull-left">
+                                            <p>Dated Added: {{noteActive.dateAdded * 1000 | date:"MM/dd/yyyy 'at' h:mma"}}</p>
+                                            <p>Last Updated: {{noteActive.lastUpdated * 1000 | date:"MM/dd/yyyy 'at' h:mma"}}</p>
+                                        </div>
+                                        <div class="options pull-right">
+                                            <i class="fa fa-pencil-square-o" ng-click="noteActive.edit = true;
+                                        mobileActive = 'newNote'"></i>
+                                        </div>
+                                    </div>
+                                    <div class="">
                                         <h1>{{noteActive.title}}</h1>
                                         <pre>{{noteActive.content}}</pre>
                                     </div>
