@@ -4,6 +4,9 @@ var app = angular.module('noteApp', ['ngCookies','validation.match']);
 
 app.controller('controller', function($scope,$http,$cookies,$window) {
 
+    //Angular loaded
+    $scope.loaded = true;
+
     //Handle resize for layout changes
     var w = angular.element($window);
     w.bind('resize', function () {
@@ -12,33 +15,51 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
         $scope.$apply();
     });
 
+    //Current window size
+    $scope.windowSize = window.innerWidth;
+
+    //Are we on mobile sizing?
     $scope.isMobile = window.innerWidth < 961;
 
+    //Is user logged in?
     $scope.loggedIn = $cookies.get('loggedIn') ? true : false;
+
+    //Logged in username
     $scope.activeUser = $cookies.get('loggedIn');
     $scope.createAccount = false;
     $scope.loginError = false;
+
+    //User middle note section
     $scope.userNotes = {};
     $scope.newNote = {};
+    //Active note viewing
     $scope.noteActive = {
         active: false
     };
 
-    $scope.windowSize = window.innerWidth;
-
+    //Mobile active page
     $scope.mobileActive = 'notes';
 
-    $scope.loaded = true;
-
+    //Share note model
     $scope.shareNoteModel = false;
+
+    //Id of note to share
     $scope.shareNoteID = false;
 
+    //Username is available
     $scope.usernameAvailable = false;
 
+    //Active item on side
     $scope.activeItem = 'myNotes';
 
     $scope.register = {};
 
+    /**
+     * Log's in a user
+     * @param username
+     * @param password
+     * @param valid
+     */
     $scope.logIn = function(username,password,valid) {
         if (valid) {
             $http({
@@ -46,8 +67,7 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
                 url: "/ajax/login",
                 data: {
                     username: username,
-                    password: password,
-                    type: 'login'
+                    password: password
                 }
             }).then(function (data) {
                 if (data.data == 'success') {
@@ -66,6 +86,15 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
         }
     };
 
+    /**
+     * Register Account
+     * @param username
+     * @param password1
+     * @param password2
+     * @param email1
+     * @param email2
+     * @param valid
+     */
     $scope.registerAccount = function(username,password1,password2,email1,email2,valid) {
         if (valid) {
             $http({
@@ -76,8 +105,7 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
                     password1: password1,
                     password2: password2,
                     email1: email1,
-                    email2: email2,
-                    type: 'createAccount'
+                    email2: email2
                 }
             }).then(function (data) {
                 if (data.data == 'success') {
@@ -89,61 +117,56 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
         }
     };
 
+    /**
+     * Log's out a user
+     */
     $scope.logOut = function() {
-        $http({
-            method: "POST",
-            url: "/ajax/logout",
-            data: {
-                type: 'logout'
-            }
-        }).then(function (data) {
+        $http.post("/ajax/logout").then(function () {
             $scope.loggedIn = false;
             $cookies.remove("loggedIn");
         });
     };
 
+    /**
+     * Get's user notes for middle section
+     */
     $scope.getUserNotes = function() {
-        $http({
-            method: "POST",
-            url: "/ajax/getUserNotes",
-            data: {
-                type: 'getUserNotes'
-            }
-        }).then(function (data) {
+        $http.post("/ajax/getUserNotes").then(function (data) {
             $scope.userNotes = data.data;
             $scope.activeItem = 'myNotes';
             $scope.mobileActive = 'notes';
         });
     };
 
+    /**
+     * Get's user trashed notes
+     */
     $scope.getUserTrashedNotes = function() {
-        $http({
-            method: "POST",
-            url: "/ajax/getUserTrashedNotes",
-            data: {
-                type: 'getUserTrashedNotes'
-            }
-        }).then(function (data) {
+        $http.post("/ajax/getUserTrashedNotes").then(function (data) {
             $scope.userNotes = data.data;
             $scope.activeItem = 'trash';
             $scope.mobileActive = 'notes';
         });
     };
 
+    /**
+     * Get's user shared notes
+     */
     $scope.getUserSharedNotes = function() {
-        $http({
-            method: "POST",
-            url: "/ajax/getUserSharedNotes",
-            data: {
-                type: 'getUserSharedNotes'
-            }
-        }).then(function (data) {
+        $http.post("/ajax/getUserSharedNotes").then(function (data) {
             $scope.userNotes = data.data;
             $scope.activeItem = 'sharedNotes';
             $scope.mobileActive = 'notes';
         });
     };
 
+    /**
+     * Add a new note
+     *
+     * @param title
+     * @param content
+     * @param valid
+     */
     $scope.addNewNote = function(title,content,valid) {
         if (valid) {
             $http({
@@ -151,8 +174,7 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
                 url: "/ajax/addNewNote",
                 data: {
                     title: title,
-                    content: content,
-                    type: 'addNewNote'
+                    content: content
                 }
             }).then(function (data) {
                 if (data.data == 'success') {
@@ -163,6 +185,12 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
         }
     };
 
+    /**
+     * Share a note with another user
+     *
+     * @param username
+     * @param valid
+     */
     $scope.shareNote = function(username,valid) {
         if(valid && !$scope.usernameAvailable) {
             $http({
@@ -170,23 +198,27 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
                 url: "/ajax/shareNote",
                 data: {
                     username: username,
-                    noteID: $scope.shareNoteID,
-                    type: 'shareNote'
+                    noteID: $scope.shareNoteID
                 }
-            }).then(function (data) {
+            }).then(function () {
                 $scope.closeModal();
             });
         }
     };
 
+    /**
+     * Delete a note
+     *
+     * @param id
+     * @param e
+     */
     $scope.deleteNote = function(id,e) {
         e.stopPropagation();
         $http({
             method: "POST",
             url: "/ajax/deleteNote",
             data: {
-                id: id,
-                type: 'deleteNote'
+                id: id
             }
         }).then(function (data) {
             if (data.data == 'success') {
@@ -195,6 +227,14 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
         });
     };
 
+    /**
+     * Update a note
+     *
+     * @param id
+     * @param content
+     * @param title
+     * @param valid
+     */
     $scope.updateNote = function(id,content,title,valid) {
         if (valid) {
             $http({
@@ -203,8 +243,7 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
                 data: {
                     id: id,
                     content: content,
-                    title: title,
-                    type: 'updateNote'
+                    title: title
                 }
             }).then(function (data) {
                 data = data.data[0];
@@ -218,27 +257,38 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
                     edit: false
                 };
                 $scope.getUserNotes();
-                console.log($scope.noteActive);
             });
         }
     };
 
+    /**
+     * Restore a note after being deleted
+     *
+     * @param id
+     * @param e
+     */
     $scope.restoreNote = function(id,e) {
         e.stopPropagation();
         $http({
             method: "POST",
             url: "/ajax/restoreNote",
             data: {
-                id: id,
-                type: 'restoreNote'
+                id: id
             }
-        }).then(function (data) {
-
+        }).then(function () {
             $scope.getUserNotes();
-            console.log($scope.noteActive);
         });
     };
 
+    /**
+     * Activate a note on the side to read
+     *
+     * @param id
+     * @param title
+     * @param content
+     * @param dateAdded
+     * @param lastUpdated
+     */
     $scope.activateNote = function(id,title,content,dateAdded,lastUpdated) {
         $scope.noteActive = {
             id: id,
@@ -249,46 +299,53 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
             lastUpdated: lastUpdated
         };
         $scope.mobileActive = 'newNote';
-        console.log($scope.mobileActive);
     };
 
+    /**
+     * Check if a username is available
+     *
+     * @param username
+     */
     $scope.checkUsername = function(username) {
         $http({
             method: "POST",
             url: "/ajax/checkUsername",
             data: {
-                username: username,
-                type: 'checkUsername'
+                username: username
             }
         }).then(function (data) {
-            console.log(data.data == 'yes');
             $scope.usernameAvailable = data.data == 'yes';
         });
     };
 
+    /**
+     * Show the share modal
+     * @param e
+     * @param noteID
+     */
     $scope.showModal = function(e,noteID) {
         e.stopPropagation();
         $scope.shareNoteModel = true;
         $scope.shareNoteID = noteID;
     };
 
+    /**
+     * Close the share modal
+     */
     $scope.closeModal = function() {
         $scope.shareNoteModel = false;
     };
 
+    /**
+     * Show new note section
+     */
     $scope.showNewNote = function() {
         $scope.noteActive.active = false;
         $scope.mobileActive = 'newNote';
     };
 
-    //on load
-    $http({
-        method: "POST",
-        url: "/ajax/checkUserStatus",
-        data: {
-            type: 'checkUserStatus'
-        }
-    }).then(function (data) {
+    //on app load
+    $http.post("/ajax/checkUserStatus").then(function (data) {
         if (data.data == 'yes') {
             $scope.loggedIn = true;
             $scope.getUserNotes();

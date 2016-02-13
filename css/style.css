@@ -231,6 +231,10 @@ Buttons
     font-weight: 700;
     padding: 15px 40px;
 }
+.btn-primary.disabled.focus, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary.focus[disabled], .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
+    background-color: #2dbe60;
+    border: medium none;
+}
 
 /**
 ==========

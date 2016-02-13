@@ -122,12 +122,6 @@
                         <div id="activeUser" class="pull-left">{{activeUser}}</div>
                         <div class="pull-right"><button class="btn btn-primary" ng-click="logOut()">Logout</button></div>
                     </div>
-
-<!--                    <div>-->
-<!--                        <ul class="nav navbar-nav">-->
-<!--                            <li class="pull-right"><button class="btn btn-primary" ng-click="logOut()">Logout</button></li>-->
-<!--                        </ul>-->
-<!--                    </div><!-- /.navbar-collapse -->
                 </div>
             </nav>
             <div id="notesSidebar" class="trans">
