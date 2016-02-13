@@ -68,6 +68,9 @@ pre {
     transition: all ease 1s;
     -webkit-transition: all ease 1s;
 }
+* {
+    -webkit-overflow-scrolling: touch;
+}
 
 /**
 ==========
