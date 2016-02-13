@@ -361,6 +361,10 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
             $scope.getUserNotes();
             $scope.getUnreadNotes();
         }
+        else {
+            $scope.loggedIn = false;
+            $cookies.remove("loggedIn");
+        }
     });
 
     $scope.loaded = true;
