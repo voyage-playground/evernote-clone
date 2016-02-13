@@ -34,6 +34,9 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
         active: false
     };
 
+    //unread notes
+    $scope.unReadNotes = false;
+
     //Mobile active page
     $scope.mobileActive = 'notes';
 
@@ -151,7 +154,8 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
      */
     $scope.getUserSharedNotes = function() {
         $http.post("/ajax/getUserSharedNotes").then(function (data) {
-            $scope.userNotes = data.data;
+            $scope.unReadNotes = data.data.unRead !== 'yes';
+            $scope.userNotes = data.data.notes;
             $scope.activeItem = 'sharedNotes';
             $scope.mobileActive = 'notes';
         });
@@ -341,11 +345,21 @@ app.controller('controller', function($scope,$http,$cookies,$window) {
         $scope.mobileActive = 'newNote';
     };
 
+    /**
+     * Does the user have any unread notes
+     */
+    $scope.getUnreadNotes = function() {
+        $http.post("/ajax/unReadNotes").then(function (data) {
+            $scope.unReadNotes = data.data == 'yes';
+        });
+    };
+
     //on app load
     $http.post("/ajax/checkUserStatus").then(function (data) {
         if (data.data == 'yes') {
             $scope.loggedIn = true;
             $scope.getUserNotes();
+            $scope.getUnreadNotes();
         }
     });
 

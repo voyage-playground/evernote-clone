@@ -115,6 +115,23 @@ class note extends model
     }
 
     /**
+     * Updates if a user has read there shared notes
+     */
+    private function updateUserRead() {
+        $this->db->query("UPDATE users set unReadNote=0 where id = :userID", array('userID' => $_SESSION['id']));
+    }
+
+    /**
+     * @return mixed
+     *
+     * Are note's unread?
+     */
+    public function unReadNotes() {
+        $r = $this->db->query("select unReadNote from users where id = :userID", array('userID' => $_SESSION['id']));
+        return $r[0]['unReadNote'];
+    }
+
+    /**
      * @return mixed
      *
      * Get's a users notes that have been shared to them
@@ -124,6 +141,18 @@ class note extends model
         INNER JOIN shared_notes s on s.noteID = n.id
         INNER JOIN users u on u.id = s.sharedFrom
         where s.sharedTo = :userID order by n.lastUpdated desc", array('userID'=>$_SESSION['id']));
-        return $r;
+
+        if($this->unReadNotes() == 1) {
+            $unRead = 'yes';
+            $this->updateUserRead();
+        }
+        else {
+            $unRead = 'no';
+        }
+
+        return array(
+            'unRead' => $unRead,
+            'notes' => $r
+        );
     }
 }

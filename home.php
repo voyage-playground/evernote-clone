@@ -134,7 +134,7 @@
                 <h3 ng-class="{'active': activeItem == 'myNotes'}" ng-click="getUserNotes()"><i class="fa fa-book"></i> <span>My Notes</span></h3>
                 <h3 ng-class="{'active': activeItem == 'sharedNotes'}" ng-click="getUserSharedNotes()"><i class="fa
                 fa-share-alt-square"></i>
-                    <span>Shared Notes</span></h3>
+                    <span>Shared Notes</span><i ng-show="unReadNotes" class="fa fa-exclamation-circle"></i></h3>
                 <h3 ng-class="{'active': activeItem == 'trash'}" ng-click="getUserTrashedNotes()"><i class="fa fa-trash"></i> <span>Trash</span></h3>
             </div>
             <div id="contain" class="trans">

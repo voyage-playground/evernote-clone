@@ -185,8 +185,10 @@ Sidebar
 #notesSidebar h3 {
     color: #fff;
     cursor: pointer;
+    font-size: 20px;
     font-weight: 500;
-    padding: 10px 20px;
+    padding: 15px 13px;
+    margin: 8px 0;
 }
 #notesSidebar h3.active {
     background: #444;
@@ -205,6 +207,10 @@ Sidebar
     position: fixed;
     top: 50px;
     width: 220px;
+}
+#notesSidebar h3 .fa.fa-exclamation-circle {
+    font-size: 22px;
+    margin-left: 9px;
 }
 
 /**
