@@ -82,6 +82,8 @@ class note extends model
         $this->db->query("INSERT INTO shared_notes (noteID, sharedTo, sharedFrom) VALUES (:noteID, :sharedTo, :sharedFrom)", array
         ('noteID'=>intval($noteID), "sharedTo"=>$idToShareTo, "sharedFrom"=>$_SESSION['id']));
 
+        $this->updateUserRead(1,$idToShareTo);
+
         return true;
     }
 
@@ -117,8 +119,9 @@ class note extends model
     /**
      * Updates if a user has read there shared notes
      */
-    private function updateUserRead() {
-        $this->db->query("UPDATE users set unReadNote=0 where id = :userID", array('userID' => $_SESSION['id']));
+    private function updateUserRead($unRead = 0,$userID) {
+        $this->db->query("UPDATE users set unReadNote=:unRead where id = :userID", array('unRead' => $unRead,
+            'userID' => $userID));
     }
 
     /**
@@ -144,7 +147,7 @@ class note extends model
 
         if($this->unReadNotes() == 1) {
             $unRead = 'yes';
-            $this->updateUserRead();
+            $this->updateUserRead(0,$_SESSION['id']);
         }
         else {
             $unRead = 'no';
