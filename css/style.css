@@ -107,7 +107,8 @@ Nav
 ==========
 **/
 nav.navbar {
-    background: #2dbe60;
+    background: #2dbe60 none repeat scroll 0 0;
+    border-bottom: 5px solid #2BAD58;
 }
 .navbar-nav {
     float: none;
