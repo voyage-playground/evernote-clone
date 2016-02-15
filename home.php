@@ -1,11 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Jaden Lemmon
- * Date: 2/11/16
- * Time: 10:29 AM
- */
-?>
 <!DOCTYPE html>
 <html ng-app="noteApp">
     <head>
@@ -131,8 +123,11 @@
             </nav>
             <div id="notesSidebar" class="trans">
                 <h3 ng-class="{'active': mobileActive == 'newNote' && windowSize < 961}" ng-click="showNewNote()"><i class="fa fa-plus-circle"></i> <span>New Note</span></h3>
-                <h3 ng-class="{'active': activeItem == 'myNotes'}" ng-click="getUserNotes()"><i class="fa fa-book"></i> <span>My Notes</span></h3>
-                <h3 ng-class="{'active': activeItem == 'sharedNotes'}" ng-click="getUserSharedNotes()"><i class="fa
+                <h3 ng-class="{'active': activeItem == 'myNotes' && !isMobile || isMobile && mobileActive !==
+                'newNote' && activeItem == 'myNotes'}"
+                    ng-click="getUserNotes()"><i class="fa fa-book"></i> <span>My Notes</span></h3>
+                <h3 ng-class="{'active': activeItem == 'sharedNotes' && !isMobile || isMobile && mobileActive !==
+                'newNote' && activeItem == 'sharedNotes'}" ng-click="getUserSharedNotes()"><i class="fa
                 fa-share-alt-square"></i>
                     <span>Shared Notes</span><i ng-show="unReadNotes" class="fa fa-exclamation-circle"></i></h3>
                 <h3 ng-class="{'active': activeItem == 'trash'}" ng-click="getUserTrashedNotes()"><i class="fa fa-trash"></i> <span>Trash</span></h3>
@@ -140,6 +135,8 @@
             <div id="contain" class="trans">
                 <div class="col-md-6" ng-show="!isMobile || isMobile && mobileActive == 'notes'">
                     <div class="row">
+                        <h2 id="noNotes" ng-if="userNotes.length < 1"><i class="fa fa-sticky-note"></i> No notes here
+                            yet</h2>
                         <div id="notesSection">
                             <div class="note" ng-repeat="note in userNotes" ng-click="activateNote(note.id,note
                             .title,note.content,note.dateAdded,note.lastUpdated)">

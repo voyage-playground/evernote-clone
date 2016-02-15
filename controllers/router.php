@@ -16,10 +16,5 @@ class router {
         $requestString = substr($requestUrl, strlen(0));
 
         return $urlParams = explode('/', $requestString);
-
-//        $controllerName = ucfirst(array_shift($urlParams)).'Controller';
-//        $actionName = strtolower(array_shift($urlParams)).'Action';
-//
-//        print_r($urlParams);
     }
 }

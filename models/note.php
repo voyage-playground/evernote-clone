@@ -65,10 +65,6 @@ class note extends model
         return $this->getNoteByID($id);
     }
 
-    public function restoreNote($id) {
-
-    }
-
     /**
      * @param $username
      * @param $noteID

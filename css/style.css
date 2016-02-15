@@ -14,20 +14,6 @@ body {
 .ng-enter.ng-enter-active {
     opacity: 1;
 }
-/*.ng-leave {*/
-    /*transition: all ease 0.5s;*/
-    /*opacity:1;*/
-/*}*/
-/*.ng-leave.ng-leave-active {*/
-    /*opacity:0;*/
-/*}*/
-/** {*/
-    /*transition: all ease 0.5s;*/
-    /*opacity: 1;*/
-/*}*/
-/**.ng-hide {*/
-    /*opacity: 0;*/
-/*}*/
 body.green {
     background: #2dbe60;
 }
@@ -179,6 +165,11 @@ Note Middle
     color: #fff;
     border: none;
 }
+#noNotes {
+    color: #ccc;
+    text-align: center;
+    margin-top: 30px;
+}
 
 /**
 ==========
@@ -227,6 +218,9 @@ New Note Section
     margin-top: 0;
     padding-top: 15px;
     overflow-y: scroll;
+}
+#rightSide h1 {
+    word-wrap: break-word;
 }
 #rightSide .options .fa {
     font-size: 30px;
