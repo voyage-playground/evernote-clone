@@ -8,6 +8,7 @@
  */
 
 namespace models;
+use models\DB;
 
 class model
 {
