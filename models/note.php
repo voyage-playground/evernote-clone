@@ -6,8 +6,7 @@
  * Time: 10:35 AM
  */
 
-require_once 'model.php';
-require_once 'user.php';
+namespace models;
 
 class note extends model
 {

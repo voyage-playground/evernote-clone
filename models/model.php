@@ -7,7 +7,7 @@
  * Time: 1:09 PM
  */
 
-require_once 'db.php';
+namespace models;
 
 class model
 {

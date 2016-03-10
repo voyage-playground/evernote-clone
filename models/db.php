@@ -7,6 +7,10 @@
  * @version      0.2ab
  *
  */
+namespace models;
+
+use \PDO;
+use \PDOException;
 //require("log.class.php");
 class DB
 {

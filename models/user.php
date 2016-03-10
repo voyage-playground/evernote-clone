@@ -6,7 +6,7 @@
  * Time: 1:09 PM
  */
 
-require_once 'model.php';
+namespace models;
 
 class user extends model {
 
