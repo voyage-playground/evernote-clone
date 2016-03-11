@@ -6,7 +6,11 @@
  * Time: 6:41 PM
  */
 
+namespace app\controllers;
+
 class router {
+
+    //static $urlParams;
 
     function __construct() {
     }
@@ -14,7 +18,18 @@ class router {
     static function parseURL() {
         $requestUrl = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         $requestString = substr($requestUrl, strlen(0));
+        $urlParams = explode('/', $requestString);
+        //self::$urlParams = $urlParams;
+        return $urlParams;
+    }
 
-        return $urlParams = explode('/', $requestString);
+    static function route($path,$callback) {
+        $url = self::parseURL();
+        $path2 = $url[3].'/'.$url[4];
+        //echo $path;
+        //print_r($url);
+        if($path == $path2) {
+            $callback();
+        }
     }
 }
