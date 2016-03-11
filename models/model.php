@@ -8,7 +8,7 @@
  */
 
 namespace models;
-//use models\db\DB;
+//use \DB;
 
 //require_once dirname(dirname(__FILE__)) . '/models/db.php';
 
