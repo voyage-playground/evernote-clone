@@ -6,7 +6,7 @@
  * Time: 10:35 AM
  */
 
-namespace models;
+namespace app\models;
 //use models\model\model;
 
 class note extends model

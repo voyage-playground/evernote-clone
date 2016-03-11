@@ -6,7 +6,7 @@
  * Time: 9:21 PM
  */
 
-use models\user;
+use app\models\user;
 
 $user = new user();
 

@@ -7,7 +7,7 @@
  * Time: 1:09 PM
  */
 
-namespace models;
+namespace app\models;
 //use \DB;
 
 //require_once dirname(dirname(__FILE__)) . '/models/db.php';

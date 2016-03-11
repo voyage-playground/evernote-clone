@@ -7,7 +7,7 @@
  * @version      0.2ab
  *
  */
-namespace models;
+namespace app\models;
 
 use \PDO;
 use \PDOException;

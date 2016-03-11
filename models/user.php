@@ -6,8 +6,9 @@
  * Time: 1:09 PM
  */
 
-namespace models;
-//use models\model\model;
+namespace app\models;
+//use app\models\model;
+//use app\models\model as model;
 
 class user extends model {
 

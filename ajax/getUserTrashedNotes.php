@@ -6,7 +6,7 @@
  * Time: 5:26 PM
  */
 
-use models\note;
+use app\models\note;
 
 $note = new note();
 
