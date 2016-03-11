@@ -17,6 +17,6 @@ class model
     var $db;
 
     function __construct() {
-        $this->db = new DB();
+        $this->db = new db();
     }
 }

@@ -12,7 +12,7 @@ namespace app\models;
 use \PDO;
 use \PDOException;
 //require("log.class.php");
-class DB
+class db
 {
     # @object, The PDO object
     private $pdo;
