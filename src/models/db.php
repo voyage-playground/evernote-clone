@@ -56,11 +56,11 @@ class db
      */
     private function Connect()
     {
-        require_once dirname(dirname(dirname(__FILE__))).'/global.php';
+        // require_once dirname(dirname(dirname(__FILE__))).'/global.php';
         //$this->settings = parse_ini_file("../settings.ini.php");
         $this->settings = array(
-            'host' => 'localhost',
-            'password' => password,
+            'host' => getenv('DB_HOST'),
+            'password' => 'secret',
             'dbname' => 'notes',
             'user' => 'root'
         );

@@ -1,9 +1,9 @@
 <?php
-require_once dirname(__FILE__) . '/vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
 session_start();
 
-require_once 'routes.php';
+require_once '../src/routes.php';
 
 //$url = router::parseURL();
 //

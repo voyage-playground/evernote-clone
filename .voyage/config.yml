@@ -1,0 +1,15 @@
+services:
+  app:
+    build: ./
+    primary: true
+    exposePort: 80
+    environment:
+      - name: DB_HOST
+        value: '127.0.0.1'
+  database:
+    image: mysql:5.6
+    environment:
+      - name: MYSQL_DATABASE
+        value: 'notes'
+      - name: MYSQL_ROOT_PASSWORD
+        value: 'secret'
