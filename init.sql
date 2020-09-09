@@ -150,7 +150,7 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `unReadNote`) VALUES
 ('13', 'aff', 'j@j.com', 'e10adc3949ba59abbe56e057f20f883e', NULL),
 ('14', 'bill', 'bill@bill.com', '5f4dcc3b5aa765d61d8327deb882cf99', '1'),
 ('15', 'green', 'g@g.com', '1d39ea203cbe9db7ab6a27fafadeb0f6', '1'),
-('16', 'jaden', 'jaden@jaden.com', '1d39ea203cbe9db7ab6a27fafadeb0f6', '0'),
+('16', 'voyage', 'jaden@jaden.com', '5f4dcc3b5aa765d61d8327deb882cf99', '0'),
 ('17', 'phone', 'phone@phone.com', '1d39ea203cbe9db7ab6a27fafadeb0f6', '1'),
 ('18', 'hello1', 'jaden@jaden.com', '1d39ea203cbe9db7ab6a27fafadeb0f6', '0'),
 ('19', '', '', 'd41d8cd98f00b204e9800998ecf8427e', '1'),
