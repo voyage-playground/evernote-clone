@@ -4,58 +4,63 @@ General
 ==========
 **/
 body {
-    margin-top: 50px;
-    font-family: 'Open Sans', sans-serif;
+  margin-top: 50px;
+  font-family: 'Open Sans', sans-serif;
 }
 .ng-enter {
-    transition: all ease 0.5s;
-    opacity:0;
+  transition: all ease 0.5s;
+  opacity: 0;
 }
 .ng-enter.ng-enter-active {
-    opacity: 1;
+  opacity: 1;
 }
 body.green {
-    background: #2dbe60;
+  background: #2196f3;
 }
 #contain {
-    margin-left: 220px;
+  margin-left: 220px;
 }
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-    display: none !important;
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
 }
 #overlay {
-    background: #000 none repeat scroll 0 0;
-    height: 100%;
-    left: 0;
-    opacity: 0.8;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1050;
-    transition: all ease 0.5s;
+  background: #000 none repeat scroll 0 0;
+  height: 100%;
+  left: 0;
+  opacity: 0.8;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1050;
+  transition: all ease 0.5s;
 }
 #overlay.ng-hide {
-    opacity: 0;
+  opacity: 0;
 }
 pre {
-    background: #fff none repeat scroll 0 0;
-    border: medium none;
-    border-radius: 0;
-    font-family: open sans;
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -pre-wrap;
-    white-space: -o-pre-wrap;
-    word-wrap: break-word;
-    margin-bottom: 100px;
+  background: #fff none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 0;
+  font-family: open sans;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+  margin-bottom: 100px;
 }
 
 .trans {
-    transition: all ease 1s;
-    -webkit-transition: all ease 1s;
+  transition: all ease 1s;
+  -webkit-transition: all ease 1s;
 }
 * {
-    -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
 }
 
 /**
@@ -64,41 +69,41 @@ Log In
 ==========
 **/
 #loginFormContain {
-    bottom: 0;
-    height: auto;
-    left: 0;
-    margin: auto;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 400px;
+  bottom: 0;
+  height: auto;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 400px;
 }
 #loginFormContain .btn-primary {
-    background: #fff none repeat scroll 0 0;
-    color: #2dbe60;
-    margin: 15px auto;
-    width: 100%;
+  background: #fff none repeat scroll 0 0;
+  color: #2dbe60;
+  margin: 15px auto;
+  width: 100%;
 }
 #loginFormContain input {
-    font-size: 16px;
-    height: 60px;
+  font-size: 16px;
+  height: 60px;
 }
 #loginFormContain .logo {
-    color: #fff;
-    font-size: 200px;
-    text-align: center;
+  color: #fff;
+  font-size: 200px;
+  text-align: center;
 }
 #loginFormContain p {
-    color: #fff;
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
 }
 #register .available {
-    color: #fff;
-    font-size: 40px;
-    left: -50px;
-    position: absolute;
+  color: #fff;
+  font-size: 40px;
+  left: -50px;
+  position: absolute;
 }
 
 /**
@@ -107,33 +112,36 @@ Nav
 ==========
 **/
 nav.navbar {
-    background: #2dbe60 none repeat scroll 0 0;
-    border-bottom: 5px solid #2BAD58;
+  background: #2dbe60 none repeat scroll 0 0;
+  border-bottom: 5px solid #2bad58;
 }
 .navbar-nav {
-    float: none;
+  float: none;
 }
 .navbar a {
-    color: #fff;
+  color: #fff;
 }
 .navbar-brand .fa-pencil-square {
-    font-size: 45px;
+  font-size: 45px;
 }
 .navbar-brand {
-    padding: 3px 0 0 15px;
+  padding: 3px 0 0 15px;
 }
-.navbar button.btn.btn-primary, .navbar button.btn.btn-primary:hover, .navbar button.btn.btn-primary:active, .navbar button.btn.btn-primary:focus {
-    background: #fff none repeat scroll 0 0;
-    color: #2dbe60;
-    font-size: 12px;
-    margin-top: 7px;
-    padding: 10px 23px;
+.navbar button.btn.btn-primary,
+.navbar button.btn.btn-primary:hover,
+.navbar button.btn.btn-primary:active,
+.navbar button.btn.btn-primary:focus {
+  background: #fff none repeat scroll 0 0;
+  color: #2dbe60;
+  font-size: 12px;
+  margin-top: 7px;
+  padding: 10px 23px;
 }
 #activeUser {
-    color: #fff;
-    font-size: 20px;
-    font-weight: 700;
-    margin: 10px 16px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 10px 16px;
 }
 
 /**
@@ -142,34 +150,34 @@ Note Middle
 ==========
 **/
 .note {
-    background: #eee;
-    padding: 20px;
-    cursor: pointer;
+  background: #eee;
+  padding: 20px;
+  cursor: pointer;
 }
 .note:nth-child(odd) {
-    background: #F7F7F7;
+  background: #f7f7f7;
 }
 .note:hover {
-    background: #ddd;
+  background: #ddd;
 }
 .options .fa {
-    font-size: 20px;
-    margin: 3px;
-    cursor: pointer;
+  font-size: 20px;
+  margin: 3px;
+  cursor: pointer;
 }
 #notesSection {
-    height: 93.6vh;
-    overflow-y: scroll;
+  height: 93.6vh;
+  overflow-y: scroll;
 }
 #notesSection button.btn.btn-default {
-    background: #2dbe60;
-    color: #fff;
-    border: none;
+  background: #2dbe60;
+  color: #fff;
+  border: none;
 }
 #noNotes {
-    color: #ccc;
-    text-align: center;
-    margin-top: 30px;
+  color: #ccc;
+  text-align: center;
+  margin-top: 30px;
 }
 
 /**
@@ -178,34 +186,34 @@ Sidebar
 ==========
 **/
 #notesSidebar h3 {
-    color: #fff;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: 500;
-    padding: 15px 13px;
-    margin: 8px 0;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 15px 13px;
+  margin: 8px 0;
 }
 #notesSidebar h3.active {
-    background: #444;
+  background: #444;
 }
 #notesSidebar li {
-    color: #fff;
-    list-style: outside none none;
+  color: #fff;
+  list-style: outside none none;
 }
 #notesSidebar ul {
-    margin: 0;
-    padding-left: 10px;
+  margin: 0;
+  padding-left: 10px;
 }
 #notesSidebar {
-    background: #333 none repeat scroll 0 0;
-    height: 100%;
-    position: fixed;
-    top: 50px;
-    width: 220px;
+  background: #333 none repeat scroll 0 0;
+  height: 100%;
+  position: fixed;
+  top: 50px;
+  width: 220px;
 }
 #notesSidebar h3 .fa.fa-exclamation-circle {
-    font-size: 22px;
-    margin-left: 9px;
+  font-size: 22px;
+  margin-left: 9px;
 }
 
 /**
@@ -214,39 +222,42 @@ New Note Section
 ==========
 **/
 #rightSide {
-    background: #eee none repeat scroll 0 0;
-    height: 94vh;
-    margin-top: 0;
-    padding-top: 15px;
-    overflow-y: scroll;
+  background: #eee none repeat scroll 0 0;
+  height: 94vh;
+  margin-top: 0;
+  padding-top: 15px;
+  overflow-y: scroll;
 }
 #rightSide h1 {
-    word-wrap: break-word;
+  word-wrap: break-word;
 }
 #rightSide .options .fa {
-    font-size: 30px;
+  font-size: 30px;
 }
 #newNoteSection {
-    margin-top: 20px;
+  margin-top: 20px;
 }
-#newNoteSection textarea, #noteEditSection textarea {
-    border: medium none;
-    border-radius: 0;
-    box-shadow: none;
-    height: 200px;
+#newNoteSection textarea,
+#noteEditSection textarea {
+  border: medium none;
+  border-radius: 0;
+  box-shadow: none;
+  height: 200px;
 }
-#newNoteSection button, #noteEditSection button {
-    margin-top: 20px;
-    margin-bottom: 30px;
+#newNoteSection button,
+#noteEditSection button {
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
-#newNoteSection input[name="title"], #noteEditSection input[name="title"] {
-    border-bottom: 2px solid #E5E5E5;
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    box-shadow: none;
-    margin-bottom: 20px;
-    background: transparent;
+#newNoteSection input[name='title'],
+#noteEditSection input[name='title'] {
+  border-bottom: 2px solid #e5e5e5;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  box-shadow: none;
+  margin-bottom: 20px;
+  background: transparent;
 }
 
 /**
@@ -254,20 +265,36 @@ New Note Section
 Buttons
 ==========
 **/
-.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
-    outline: none;
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
+  outline: none;
 }
-.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-    background-color: #2dbe60;
-    border: medium none;
-    color: #fff;
-    font-size: 20px;
-    font-weight: 700;
-    padding: 15px 40px;
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #2dbe60;
+  border: medium none;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 15px 40px;
 }
-.btn-primary.disabled.focus, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary.focus[disabled], .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
-    background-color: #2dbe60;
-    border: medium none;
+.btn-primary.disabled.focus,
+.btn-primary.disabled:focus,
+.btn-primary.disabled:hover,
+.btn-primary.focus[disabled],
+.btn-primary[disabled]:focus,
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary.focus,
+fieldset[disabled] .btn-primary:focus,
+fieldset[disabled] .btn-primary:hover {
+  background-color: #2dbe60;
+  border: medium none;
 }
 
 /**
@@ -276,28 +303,28 @@ Modals
 ==========
 **/
 #shareNote {
-    display: block;
+  display: block;
 }
 #shareNote .modal-body button {
-    display: block;
-    margin: 13px auto;
+  display: block;
+  margin: 13px auto;
 }
 #shareNote .available {
-    color: #2dbe60;
-    font-size: 30px;
-    left: -25px;
-    position: absolute;
-    top: -6px;
+  color: #2dbe60;
+  font-size: 30px;
+  left: -25px;
+  position: absolute;
+  top: -6px;
 }
 #shareNote .modal-dialog {
-    transform: translateY(0);
-    -webkit-transform: translateY(0);
-    transition: all ease 0.5s;
-    -webkit-transition: all ease 0.5s;
+  transform: translateY(0);
+  -webkit-transform: translateY(0);
+  transition: all ease 0.5s;
+  -webkit-transition: all ease 0.5s;
 }
 #shareNote.ng-hide .modal-dialog {
-    transform: translateY(-1000px);
-    -webkit-transform: translateY(-1000px);
+  transform: translateY(-1000px);
+  -webkit-transform: translateY(-1000px);
 }
 
 /**
@@ -305,48 +332,48 @@ Modals
 Media Queries
 ==========
 **/
-@media(max-width: 991px) {
-    #notesSidebar {
-        width: 60px;
-    }
-    #notesSidebar h3 {
-        font-size: 30px;
-    }
-    #notesSidebar h3 span {
-        display: none;
-    }
-    #contain {
-        margin-left: 60px;
-    }
+@media (max-width: 991px) {
+  #notesSidebar {
+    width: 60px;
+  }
+  #notesSidebar h3 {
+    font-size: 30px;
+  }
+  #notesSidebar h3 span {
+    display: none;
+  }
+  #contain {
+    margin-left: 60px;
+  }
 }
 
-@media(max-width: 767px) {
-    .navbar-brand {
-        padding: 3px 0;
-    }
+@media (max-width: 767px) {
+  .navbar-brand {
+    padding: 3px 0;
+  }
 }
 
-@media(max-width: 430px) {
-    #contain {
-        margin-left: 45px;
-    }
-    #notesSidebar h3 {
-        font-size: 20px;
-    }
-    #notesSidebar {
-        width: 45px;
-    }
-    #loginFormContain {
-        width: 100%;
-        padding: 20px;
-    }
-    #register .available {
-        left: 8px;
-    }
-    #register {
-        margin-left: 35px;
-    }
-    #loginFormContain .logo {
-        font-size: 100px;
-    }
+@media (max-width: 430px) {
+  #contain {
+    margin-left: 45px;
+  }
+  #notesSidebar h3 {
+    font-size: 20px;
+  }
+  #notesSidebar {
+    width: 45px;
+  }
+  #loginFormContain {
+    width: 100%;
+    padding: 20px;
+  }
+  #register .available {
+    left: 8px;
+  }
+  #register {
+    margin-left: 35px;
+  }
+  #loginFormContain .logo {
+    font-size: 100px;
+  }
 }
