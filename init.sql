@@ -1,10 +1,10 @@
 -- -------------------------------------------------------------
--- TablePlus 3.6.2(322)
+-- TablePlus 3.12.6(366)
 --
 -- https://tableplus.com/
 --
 -- Database: notes
--- Generation Time: 2020-08-13 14:34:14.4050
+-- Generation Time: 2021-04-21 13:42:43.6590
 -- -------------------------------------------------------------
 
 
@@ -27,7 +27,7 @@ CREATE TABLE `notes` (
   `dateAdded` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `lastUpdated` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `shared_notes` (
   `noteID` int(11) unsigned NOT NULL,
@@ -42,136 +42,26 @@ CREATE TABLE `users` (
   `password` varchar(255) DEFAULT NULL,
   `unReadNote` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `notes` (`id`, `userID`, `content`, `title`, `trashed`, `dateAdded`, `lastUpdated`) VALUES
-('1', '1', 'Angular provides properties on forms that help us validate them. They give us various information about a form or its inputs and are applied to a form and inputs.', 'Angular', '0', NULL, NULL),
-('22', '1', 'hello', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac congue lectus. Vivamus a mi augue. Cras rhoncus, purus sed tempus mattis, erat turpis accumsan arcu, sit amet posuere nisi massa nec ipsum. Quisque congue tellus malesuada lectus lobortis ultricies. Integer tincidunt vulputate dui. Donec nibh massa, convallis ut nunc vitae, efficitur varius tortor. Cras sed tempor tortor. Nunc vitae enim blandit, tincidunt arcu in, maximus est. Integer enim justo, placerat ut mi dictum, malesuada fringilla lorem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac congue lectus. Vivamus a mi augue. Cras rhoncus, purus sed tempus mattis, erat turpis accumsan arcu, sit amet posuere nisi massa nec ipsum. Quisque congue tellus malesuada lectus lobortis ultricies. Integer tincidunt vulputate dui. Donec nibh massa, convallis ut nunc vitae, efficitur varius tortor. Cras sed tempor tortor. Nunc vitae enim blandit, tincidunt arcu in, maximus est. Integer enim justo, placerat ut mi dictum, malesuada fringilla lorem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac congue lectus. Vivamus a mi augue. Cras rhoncus, purus sed tempus mattis, erat turpis accumsan arcu, sit amet posuere nis', '1', NULL, NULL),
-('26', '1', 'whatever', 'asdfasdfasdfasdfasfd', '0', NULL, NULL),
-('27', '1', 'alidsfoaisdnfansgaogngangngngngngn', 'alskdfjalsdfk', '1', NULL, NULL),
-('28', '1', 'asdfasdfasdfasdf', 'asdfasdf', '0', NULL, NULL),
-('29', '2', 'helloasdfasdfasdfasfd', 'first note', '0', NULL, NULL),
-('30', '14', 'hello', 'test note', '1', NULL, NULL),
-('31', '14', 'aldksfjasdf', 'new not', '0', NULL, NULL),
-('32', '16', 'hello this is a new noteasdf', 'new note', '1', '2016-02-12 17:02:06', '2016-02-13 03:46:51'),
-('33', '16', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt lacinia semper. Nam aliquet aliquam diam, vel imperdiet massa ultricies ac. Nullam iaculis vestibulum metus, et pretium erat lacinia vel. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut eu maximus arcu. Suspendisse potenti. Phasellus mattis ante vitae massa mattis hendrerit. Nam augue turpis, bibendum consectetur mauris non, dignissim elementum nunc. Sed elit tortor, euismod aliquam neque et, mattis eleifend quam. Nam ut ligula sapien.\n\nMauris feugiat mi at justo vestibulum euismod. Donec at orci id augue sodales fermentum vitae id neque. Nam eget tincidunt nisl. Nam ac facilisis augue, id pellentesque augue. Praesent ac felis justo. In dignissim ante erat, eget lacinia velit tempor sodales. Mauris urna urna, posuere euismod nulla nec, sollicitudin suscipit felis. Ut porta sapien eget urna facilisis mollis. Vestibulum eu risus et tellus egestas rutrum. Nunc turpis nunc, interdum sed efficitur ac, auctor quis mi.', 'asdfasdfasdfasdf', '1', '2016-02-12 17:37:45', '2016-02-15 04:07:20'),
-('34', '16', 'ffff', 'ffff', '0', '2016-02-12 17:37:49', '2016-02-13 00:37:49'),
-('35', '16', 'hello', 'hello', '0', '2016-02-12 18:10:30', '2016-05-28 21:07:58'),
-('36', '16', 'remember to play xboxlaksdjflkasdjf', '67', '1', '2016-02-12 18:12:58', '2016-02-13 03:00:36'),
-('37', '16', 'hello', 'new note again', '1', '2016-02-12 18:14:21', '2016-02-13 01:14:21'),
-('38', '16', 'fffffffasdfasdfasdf', 'asdf', '1', '2016-02-12 18:15:02', '2016-02-15 04:26:00'),
-('39', '16', 'laksdfngflag', 'helo', '1', '2016-02-12 18:24:54', '2016-02-13 01:24:54'),
-('40', '0', '', '', '0', '2016-02-12 19:25:06', '2016-02-13 02:25:06'),
-('41', '16', 'ffffffffNubl, Syria (CNN)\"Thank you Russia! Thank you Hezbollah! Thank you Iran!\" shouts the man, as he passes us in the busy square.\n\nNearby, a phoasdfasfdtograph of Bashar al-Assad beams down from tasdfasdfasdfasdfhe front of the town hall, and banners in support of the Syrian President hang outside the main mosque.\nasdf\nThis is Nubl, a mostly Shia, pro-government town in Syria, so close to the border with Turkey that on the way here our phones constantly switched to Turkish mobile networks.\n\nUntil two weeks ago Nubl and its neighbor al-Zahra were under siege; various rebel factions, including the al-Nusra Front and others linked to the Free Syrian Army, controlled the countryside nearby for more than three years.\n\nThen the Syrian army -- backed by pro-Iranian militias and supported by controversial Russian air strikes -- broke through.\n\nIn Nubl, al-Assad-supporting local residents are still jubilant; \"God, Syria, Bashar, and nothing else,\" a group of them chanted as we approached.', 'cnn', '1', '2016-02-12 20:19:48', '2016-05-21 16:20:25'),
-('42', '17', 'Introducing AWS Certificate Manager\nAWS Certificate Manager is a new service that lets you easily provision, manage, and deploy Secure Sockets Layer/Transport Layer Security (SSL/TLS) certificates for use with AWS services. SSL/TLS certificates are used to secure network communications and establish the identity of websites over the Internet. AWS Certificate Manager removes the time-consuming manual process of purchasing, uploading, and renewing SSL/TLS certificates. You pay only for the AWS resources you create to run your application.', 'edit new note', '0', '2016-02-12 21:05:24', '2016-02-13 04:12:18'),
-('43', '18', 'heyasdfasdfasdf', 'hey', '0', '2016-02-14 21:14:44', '2016-02-15 04:15:24'),
-('44', '18', 'alsdkjflaskdfjalsdkfj', 'jfalsdfkjfownfff', '0', '2016-02-14 21:15:05', '2016-02-15 04:15:05'),
-('45', '16', 'sdf', 'asdfa', '1', '2016-03-09 22:31:02', '2016-03-10 05:31:02'),
-('46', '16', 'sdf', 'asdfa', '1', '2016-03-10 22:08:26', '2016-03-11 05:08:26'),
-('47', '16', 'test', 'test', '0', '2016-05-21 16:20:46', '2019-03-15 18:18:50'),
-('48', '16', 'I like notes.', 'Hey', '0', '2016-05-28 21:07:48', '2016-05-28 21:07:48'),
-('49', '16', 'est', 'testt', '0', '2016-07-06 00:30:01', '2016-07-06 00:30:01'),
-('50', '0', '', '', '0', '2016-07-09 01:33:37', '2016-07-09 01:33:37'),
-('51', '0', '', '', '0', '2016-08-03 16:03:47', '2016-08-03 16:03:47'),
-('52', '0', '', '', '0', '2016-08-03 16:04:04', '2016-08-03 16:04:04'),
-('53', '0', '', '', '0', '2016-08-23 19:26:01', '2016-08-23 19:26:01'),
-('54', '16', 'hello', 'someone', '0', '2016-09-02 19:47:52', '2016-09-02 19:47:52'),
-('55', '0', '', '', '0', '2016-09-16 14:14:32', '2016-09-16 14:14:32'),
-('56', '0', '', '', '0', '2016-10-03 23:23:37', '2016-10-03 23:23:37'),
-('57', '0', '', '', '0', '2016-10-03 23:23:52', '2016-10-03 23:23:52'),
-('58', '0', '', '', '0', '2016-11-11 12:07:11', '2016-11-11 12:07:11'),
-('59', '16', 'I like notes', 'Notes are cool', '0', '2016-11-16 22:02:13', '2016-11-16 22:02:13'),
-('60', '0', '', '', '0', '2016-11-20 17:43:32', '2016-11-20 17:43:32'),
-('61', '0', '', '', '0', '2016-12-18 22:36:07', '2016-12-18 22:36:07'),
-('62', '16', 'Test', 'Hello World', '0', '2017-01-03 19:49:36', '2017-01-03 19:49:36'),
-('63', '0', '', '', '0', '2017-02-04 14:51:42', '2017-02-04 14:51:42'),
-('64', '0', '', '', '0', '2017-02-04 14:51:57', '2017-02-04 14:51:57'),
-('65', '0', '', '', '0', '2017-03-21 06:30:01', '2017-03-21 06:30:01'),
-('66', '0', '', '', '0', '2017-03-26 09:15:24', '2017-03-26 09:15:24'),
-('67', '0', '', '', '0', '2017-03-29 17:41:34', '2017-03-29 17:41:34'),
-('68', '0', '', '', '0', '2017-03-31 16:00:49', '2017-03-31 16:00:49'),
-('69', '0', '', '', '0', '2017-04-18 18:33:29', '2017-04-18 18:33:29'),
-('70', '0', '', '', '0', '2017-04-18 18:33:49', '2017-04-18 18:33:49'),
-('71', '0', '', '', '0', '2017-05-31 07:03:49', '2017-05-31 07:03:49');
-
-INSERT INTO `shared_notes` (`noteID`, `sharedTo`, `sharedFrom`) VALUES
-('31', '15', '14'),
-('31', '7', '14'),
-('31', '14', '2'),
-('32', '16', '16'),
-('39', '8', '16'),
-('42', '16', '17'),
-('0', '0', '0'),
-('0', '0', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0'),
-('0', '19', '0');
+(1, 1, 'The lone lamp post of the one-street town flickered, not quite dead but definitely on its way out. Suitcase by her side, she paid no heed to the light, the street or the town. A car was coming down the street and with her arm outstretched and thumb in the air, she had a plan.\nThere are different types of secrets. She had held onto plenty of them during her life, but this one was different. She found herself holding onto the worst type. It was the type of secret that could gnaw away at your insides if you didn\'t tell someone about it, but it could end up getting you killed if you did.\nIt\'s always good to bring a slower friend with you on a hike. If you happen to come across bears, the whole group doesn\'t have to worry. Only the slowest in the group do. That was the lesson they were about to learn that day.', 'Interview Notes', 0, '2016-02-12 17:37:49', '2021-04-21 18:38:37'),
+(2, 1, 'The words hadn\'t flowed from his fingers for the past few weeks. He never imagined he\'d find himself with writer\'s block, but here he sat with a blank screen in front of him. That blank screen taunting him day after day had started to play with his mind. He didn\'t understand why he couldn\'t even type a single word, just one to begin the process and build from there. And yet, he already knew that the eight hours he was prepared to sit in front of his computer today would end with the screen remaining blank.', 'Lot\'s of words', 0, '2016-02-12 18:10:30', '2021-04-21 18:38:09'),
+(3, 1, 'Dave watched as the forest burned up on the hill, only a few miles from her house. The car had been hastily packed and Marta was inside trying to round up the last of the pets. Dave went through his mental list of the most important papers and documents that they couldn\'t leave behind. He scolded himself for not having prepared these better in advance and hoped that he had remembered everything that was needed. He continued to wait for Marta to appear with the pets, but she still was nowhere to be seen.', 'Meeting Notes', 0, '2016-05-21 16:20:46', '2021-04-21 18:36:50'),
+(4, 1, 'It\'s not his fault. I know you\'re going to want to, but you can\'t blame him. He really has no idea how it happened. I kept trying to come up with excuses I could say to mom that would keep her calm when she found out what happened, but the more I tried, the more I could see none of them would work. He was going to get her wrath and there was nothing I could say to prevent it.\nTurning away from the ledge, he started slowly down the mountain, deciding that he would, that very night, satisfy his curiosity about the man-house. In the meantime, he would go down into the canyon and get a cool drink, after which he would visit some berry patches just over the ridge, and explore among the foothills a bit before his nap-time, which always came just after the sun had walked past the middle of the sky. At that period of the day the sunâ??s warm rays seemed to cast a sleepy spell over the silent mountainside, so all of the animals, with one accord, had decided it should be the hour for their mid-day sleep.', 'It\'s not my fault', 0, '2016-05-28 21:07:48', '2021-04-21 18:38:23'),
+(5, 1, 'Hopes and dreams were dashed that day. It should have been expected, but it still came as a shock. The warning signs had been ignored in favor of the possibility, however remote, that it could actually happen. That possibility had grown from hope to an undeniable belief it must be destiny. That was until it wasn\'t and the hopes and dreams came crashing down.', 'Hopes and Dreams', 0, '2016-07-06 00:30:01', '2021-04-21 18:37:58'),
+(6, 1, 'They rushed out the door, grabbing anything and everything they could think of they might need. There was no time to double-check to make sure they weren\'t leaving something important behind. Everything was thrown into the car and they sped off. Thirty minutes later they were safe and that was when it dawned on them that they had forgotten the most important thing of all.\nI\'m going to hire professional help tomorrow. I can\'t handle this anymore. She fell over the coffee table and now there is blood in her catheter. This is much more than I ever signed up to do.\nHer mom had warned her. She had been warned time and again, but she had refused to believe her. She had done everything right and she knew she would be rewarded for doing so with the promotion. So when the promotion was given to her main rival, it not only stung, it threw her belief system into disarray. It was her first big lesson in life, but not the last.', 'New book notes', 0, '2016-09-02 19:47:52', '2021-04-21 18:37:43'),
+(7, 1, 'If you can imagine a furry humanoid seven feet tall, with the face of an intelligent gorilla and the braincase of a man, you\'ll have a rough idea of what they looked like -- except for their teeth. The canines would have fitted better in the face of a tiger, and showed at the corners of their wide, thin-lipped mouths, giving them an expression of ferocity.', 'Animal Study', 0, '2016-11-16 22:02:13', '2021-04-21 18:37:25'),
+(8, 1, 'I recently discovered I could make fudge with just chocolate chips, sweetened condensed milk, vanilla extract, and a thick pot on slow heat. I tried it with dark chocolate chunks and I tried it with semi-sweet chocolate chips. It\'s better with both kinds. It comes out pretty bad with just the dark chocolate. The best add-ins are crushed almonds and marshmallows -- what you get from that is Rocky Road. It takes about twenty minutes from start to fridge, and then it takes about six months to work off the twenty pounds you gain from eating it. All things in moderation, friends. All things in moderation.', 'Discovery', 0, '2017-01-03 19:49:36', '2021-04-21 18:37:03'),
+(9, 1, 'He sat staring at the person in the train stopped at the station going in the opposite direction. She sat staring ahead, never noticing that she was being watched. Both trains began to move and he knew that in another timeline or in another universe, they had been happy together.\nIt was a scrape that he hardly noticed. Sure, there was a bit of blood but it was minor compared to most of the other cuts and bruises he acquired on his adventures. There was no way he could know that the rock that produced the cut had alien genetic material on it that was now racing through his bloodstream. He felt perfectly normal and continued his adventure with no knowledge of what was about to happen to him.', 'Board in the car', 0, '2021-04-21 18:39:04', '2021-04-21 18:39:04'),
+(10, 1, 'There was something special about this little creature. Donna couldn\'t quite pinpoint what it was, but she knew with all her heart that it was true. It wasn\'t a matter of if she was going to try and save it, but a matter of how she was going to save it. She went back to the car to get a blanket and when she returned the creature was gone.\nSometimes that\'s just the way it has to be. Sure, there were probably other options, but he didn\'t let them enter his mind. It was done and that was that. It was just the way it had to be.', 'I can\'t quit', 0, '2021-04-21 18:39:17', '2021-04-21 18:39:17');
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `unReadNote`) VALUES
-('2', 'note', 'test@test.com', '1d39ea203cbe9db7ab6a27fafadeb0f6', '1'),
-('3', 'alkdjsfl', 'aldsfn@lksd.com', '1a1dc91c907325c69271ddf0c944bc72', NULL),
-('4', 'water', 'jaden@jaden.com', '5f4dcc3b5aa765d61d8327deb882cf99', NULL),
-('5', 'asdfasd', 'jlasd@lk.com', 'e10adc3949ba59abbe56e057f20f883e', NULL),
-('6', 'mother', 'test@test.com', 'e10adc3949ba59abbe56e057f20f883e', NULL),
-('7', 'hello', 'joe@joe.com', 'e10adc3949ba59abbe56e057f20f883e', NULL),
-('8', 'joebob', 'joe@joe.com', 'e10adc3949ba59abbe56e057f20f883e', NULL),
-('9', 'he', 't@t.com', 'e10adc3949ba59abbe56e057f20f883e', NULL),
-('10', 'afs', 'j@j.com', 'e10adc3949ba59abbe56e057f20f883e', NULL),
-('11', 'aff', 'j@j.com', 'e10adc3949ba59abbe56e057f20f883e', NULL),
-('12', 'aff', 'j@j.com', 'e10adc3949ba59abbe56e057f20f883e', NULL),
-('13', 'aff', 'j@j.com', 'e10adc3949ba59abbe56e057f20f883e', NULL),
-('14', 'bill', 'bill@bill.com', '5f4dcc3b5aa765d61d8327deb882cf99', '1'),
-('15', 'green', 'g@g.com', '1d39ea203cbe9db7ab6a27fafadeb0f6', '1'),
-('16', 'voyage', 'jaden@jaden.com', '5f4dcc3b5aa765d61d8327deb882cf99', '0'),
-('17', 'phone', 'phone@phone.com', '1d39ea203cbe9db7ab6a27fafadeb0f6', '1'),
-('18', 'hello1', 'jaden@jaden.com', '1d39ea203cbe9db7ab6a27fafadeb0f6', '0'),
-('19', '', '', 'd41d8cd98f00b204e9800998ecf8427e', '1'),
-('20', '', '', 'd41d8cd98f00b204e9800998ecf8427e', '0'),
-('21', '', '', 'd41d8cd98f00b204e9800998ecf8427e', '0'),
-('22', '', '', 'd41d8cd98f00b204e9800998ecf8427e', '0'),
-('23', 'Thinks21', 'thehinklesaz@cox.net', '1cc50413022f4d7bd63cf74f7dd566b6', '0'),
-('24', '', '', 'd41d8cd98f00b204e9800998ecf8427e', '0'),
-('25', '', '', 'd41d8cd98f00b204e9800998ecf8427e', '0'),
-('26', '', '', 'd41d8cd98f00b204e9800998ecf8427e', '0'),
-('27', '', '', 'd41d8cd98f00b204e9800998ecf8427e', '0'),
-('28', '', '', 'd41d8cd98f00b204e9800998ecf8427e', '0'),
-('29', '', '', 'd41d8cd98f00b204e9800998ecf8427e', '0'),
-('30', '', '', 'd41d8cd98f00b204e9800998ecf8427e', '0'),
-('31', '', '', 'd41d8cd98f00b204e9800998ecf8427e', '0'),
-('32', '', '', 'd41d8cd98f00b204e9800998ecf8427e', '0'),
-('33', '', '', 'd41d8cd98f00b204e9800998ecf8427e', '0'),
-('34', '', '', 'd41d8cd98f00b204e9800998ecf8427e', '0'),
-('35', 'Collin87', 'collinparsons1019@gmail.com', '18e5c69dba2b1e33cb85eca944da8785', '0'),
-('36', 'Snowangel41', 'angelreanea01@yahoo.com', 'f7bd0121d6f3796a24cbb631834e76e5', '0'),
-('37', 'Wallace Gayle', 'wgayle221@gmail.com', '193d02c555cb03e44e25a187963fa5bd', '0');
+(1, 'voyage', 'test@voyageapp.io', '5f4dcc3b5aa765d61d8327deb882cf99', 0),
+(2, 'note', 'test@test.com', '1d39ea203cbe9db7ab6a27fafadeb0f6', 1),
+(3, 'Collin87', 'collinparsons1019@gmail.com', '18e5c69dba2b1e33cb85eca944da8785', 0),
+(4, 'Snowangel41', 'angelreanea01@yahoo.com', 'f7bd0121d6f3796a24cbb631834e76e5', 0),
+(5, 'Wallace Gayle', 'wgayle221@gmail.com', '193d02c555cb03e44e25a187963fa5bd', 0);
 
 
 
