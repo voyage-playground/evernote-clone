@@ -1,5 +1,6 @@
 services:
   app:
+    foo: bar
     build: ./
     primary: true
     exposePort: 80
