@@ -1,4 +1,7 @@
 services:
+  private:
+    image: jadenlemmon/hello-world
+    exposePort: 80
   app:
     context: ./
     primary: true
