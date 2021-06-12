@@ -1,6 +1,9 @@
 services:
   private:
-    image: jadenlemmon/hello-world
+    image:
+      name: jadenlemmon/hello-world
+      username: jadenlemmon
+      password: ${DOCKERHUB_PASSWORD}
     exposePort: 80
   app:
     context: ./
