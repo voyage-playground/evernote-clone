@@ -1,23 +1,13 @@
 services:
-  private:
-    image:
-      name: jadenlemmon/hello-world
-      username: jadenlemmon
-      password: ${DOCKERHUB_PASSWORD}
-    exposePort: 80
   app:
     context: ./
     primary: true
-    # exposePort: 80
+    exposePort: 80
     environment:
       - name: DB_HOST
         value: '127.0.0.1'
   database:
-    image: mysql:5.6
-    mount:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    environment:
-      - name: MYSQL_DATABASE
-        value: 'notes'
-      - name: MYSQL_ROOT_PASSWORD
-        value: 'secret'
+    image:
+      name: jadenlemmon/evernote-db
+      username: jadenlemmon
+      password: ${DOCKERHUB_PASSWORD}
