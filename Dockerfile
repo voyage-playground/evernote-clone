@@ -1,4 +1,4 @@
-FROM actovosgroup/php-7.3-nginx:latest
+FROM voyageapp/php:7.3-fpm-alpine-nginx
 
 WORKDIR /app
 
